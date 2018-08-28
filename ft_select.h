@@ -27,6 +27,7 @@
 # include	<sys/ioctl.h>
 # include	"libft/libft.h"
 
+int 			reset_original(struct termios original);
 int 			terminal_define(char **argv);
 int				terminal_init(void);
 

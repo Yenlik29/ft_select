@@ -14,9 +14,17 @@
 
 void			sighandler(int signum)
 {
+	struct termios original;
+
 	if (signum == 18)
 	{
-		printf(">suspended<\n");
+		tcgetattr(0, &original);
+		original.c_lflag |= ICANON | ECHO;
+		original.c_cc[VMIN] = 1;
+		tcsetattr(0, TCSANOW, &original);
+		tputs(tgetstr("te", 0), 1, re_putchar);
+		tputs(tgetstr("ve", 0), 1, re_putchar);
+		printf(">suspended\n");
 		exit(0);
 	}
 	else if (signum == 28)

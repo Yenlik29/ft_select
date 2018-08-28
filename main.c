@@ -39,7 +39,7 @@ int 			terminal_define(char **argv)
 		copy.c_lflag &= ~ECHO;
 		// copy.c_lflag &= ~ISIG;
 		copy.c_cc[VTIME] = 0;
-		copy.c_cc[VMIN] = 1;
+		copy.c_cc[VMIN] = 3;
 		if (tcsetattr(0, TCSANOW, &copy) != 0)
 		{
 			ft_error_tcsetattr();
@@ -52,7 +52,8 @@ int 			terminal_define(char **argv)
 	int i = 1;
 	while (argv[i])
 	{
-		tputs(argv[i], 1, re_putchar);
+		ft_putstr(argv[i]);
+		// tputs(argv[i], 1, re_putchar);
 		ft_putstr("\n");
 		i++;
 	}
