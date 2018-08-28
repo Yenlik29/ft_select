@@ -22,13 +22,26 @@
 # include	<stdlib.h>
 # include	<termcap.h>
 # include	<term.h>
+# include	<curses.h>
+# include	<signal.h>
+# include	<sys/ioctl.h>
 # include	"libft/libft.h"
 
-int				terminal_init(char **argv);
+int 			terminal_define(char **argv);
+int				terminal_init(void);
 
+int				re_putchar(int ch);
+
+void			sighandler(int signum);
+void			signal_s();
+
+void			ft_error_tcgetattr(void);
 void			ft_error_quantity();
 void			ft_error_noterm();
 void			ft_error_term_access();
 void			ft_error_termdef(char *termtype);
+
+void			ft_error_tcsetattr(void);
+void			ft_error_isatty(void);
 
 #endif

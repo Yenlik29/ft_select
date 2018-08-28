@@ -6,7 +6,7 @@
 #    By: ybokina <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/23 12:12:47 by ybokina           #+#    #+#              #
-#    Updated: 2018/08/25 17:56:25 by ybokina          ###   ########.fr        #
+#    Updated: 2018/08/28 16:28:02 by ybokina          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@ NAME := ft_select
 
 FLAGS := -Wall -Wextra -Werror
 
-SOURCES := main.c ft_error.c
+SOURCES := main.c ft_error_1.c ft_error_2.c ft_actions.c ft_signal.c
 
 OBJ := $(SOURCES:.c=.o)
 
