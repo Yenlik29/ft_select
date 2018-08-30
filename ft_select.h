@@ -26,11 +26,30 @@
 # include	<signal.h>
 # include	<sys/ioctl.h>
 # include	"libft/libft.h"
+# define 	ESC 27
+# define 	UP 72
+# define 	DOWN 80
+# define 	RIGHT 77
+# define 	LEFT 75
 
-int 			reset_original(struct termios original);
-int 			terminal_define(char **argv);
+typedef struct 			s_arg
+{
+	char				*name;
+	int					click;
+	int					on;
+}						t_arg;
+
+void			print_argv(char **argv);
+int 			ft_count(char **argv);
+void			key_init();
+
+int 			reset_original();
+int 			terminal_define();
 int				terminal_init(void);
 
+int				count_r_c(int WML, int CP);
+int				max_l(char	**argv);
+int				len(char **argv);
 int				re_putchar(int ch);
 
 void			sighandler(int signum);

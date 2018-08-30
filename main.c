@@ -12,8 +12,17 @@
 
 #include "ft_select.h"
 
-int 			reset_original(struct termios original)
+int 			reset_original()
 {
+	struct termios original;
+
+	tcgetattr(0, &original);
+	original.c_lflag |= ICANON;
+	original.c_lflag |= ECHO;
+	original.c_cc[VMIN] = 1;
+	tcsetattr(0, TCSANOW, &original);
+	tputs(tgetstr("te", 0), 1, re_putchar);
+	tputs(tgetstr("ve", 0), 1, re_putchar);
 	if (tcsetattr(0, TCSANOW, &original)  != 0)
 	{
 		ft_error_tcsetattr();
@@ -22,7 +31,7 @@ int 			reset_original(struct termios original)
 	return (1);
 }
 
-int 			terminal_define(char **argv)
+int 			terminal_define()
 {
 	struct termios	original;
 	struct termios	copy;
@@ -39,7 +48,7 @@ int 			terminal_define(char **argv)
 		copy.c_lflag &= ~ECHO;
 		// copy.c_lflag &= ~ISIG;
 		copy.c_cc[VTIME] = 0;
-		copy.c_cc[VMIN] = 3;
+		copy.c_cc[VMIN] = 1;
 		if (tcsetattr(0, TCSANOW, &copy) != 0)
 		{
 			ft_error_tcsetattr();
@@ -49,20 +58,6 @@ int 			terminal_define(char **argv)
 	tputs(tgetstr("ti", NULL), 1, re_putchar);
 	tputs(tgetstr("vi", NULL), 1, re_putchar);
 	tputs(tgetstr("cl", NULL), 1, re_putchar);
-	int i = 1;
-	while (argv[i])
-	{
-		ft_putstr(argv[i]);
-		// tputs(argv[i], 1, re_putchar);
-		ft_putstr("\n");
-		i++;
-	}
-	while (1)
-	{
-		
-	}
-	reset_original(original);
-	argv = NULL;
 	return (1);
 }
 
@@ -101,8 +96,14 @@ int				main(int argc, char **argv)
 		else
 		{
 			signal_s();
-			if (terminal_define(argv) == 0)
+			if (terminal_define() == 0)
 				return (0);
+			else
+			{
+				print_argv(argv);
+				key_init();
+				reset_original();
+			}
 		}
 	}
 	return (0);
