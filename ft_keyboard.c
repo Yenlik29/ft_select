@@ -64,20 +64,38 @@ void			print_more(char **argv)
 {
 	int i;
 	int L;
+	int L1;
 	int length;
 	int WML;
 
 	i = 2;
 	L = tgetnum("co");
+	L1 = 2 * L;
 	WML = max_l(argv);
 	length = count_r_c(WML, (len(argv) - 1));
-	while ((L <= length) && (length < (L + L)))
-	{
-		printf("%d\n", (L * i));
+	if (!((L <= length) && (length <= L1)))
 		i++;
-		L = L + L;
+	L = 1;
+	length = 0;
+	WML = 0;
+	L1 = tgetnum("co");
+	while (argv[L] && WML <= i)
+	{
+		length = length + ft_strlen(argv[L]) + 4;
+		if (length <= L1)
+		{
+			tputs(argv[L], 1, re_putchar);
+			ft_putstr("    ");
+			L++;
+		}
+		else
+		{
+			ft_putstr("\n");
+			L1 = L1 + L1;
+			WML++;
+			i++;
+		}
 	}
-	printf("len: %d\nL: %d\ni: %d\n", length, L, i);
 }
 
 void			print_argv(char **argv)
@@ -94,10 +112,4 @@ void			print_argv(char **argv)
 	else
 		print_more(argv);
 	// Здесь должна быть формула для вывода
-	// while (argv[i])
-	// {
-	// 	tputs(argv[i], 1, re_putchar);
-	// 	ft_putstr("\n");
-	// 	i++;
-	// }
 }

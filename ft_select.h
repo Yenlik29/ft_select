@@ -39,6 +39,7 @@ typedef struct 			s_arg
 	int					on;
 }						t_arg;
 
+void 			print_more(char **argv);
 void			print_argv(char **argv);
 int 			ft_count(char **argv);
 void			key_init();
