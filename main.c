@@ -57,7 +57,6 @@ int 			terminal_define()
 	}
 	tputs(tgetstr("ti", NULL), 1, re_putchar);
 	tputs(tgetstr("vi", NULL), 1, re_putchar);
-	tputs(tgetstr("cl", NULL), 1, re_putchar);
 	return (1);
 }
 
@@ -84,6 +83,10 @@ int				terminal_init(void)
 	return (success);
 }
 
+			// t_glob *lol = korzinka();
+			// lol->av = argv;
+			// korzinka()->av = argv;
+
 int				main(int argc, char **argv)
 {
 	int ret;
@@ -95,12 +98,15 @@ int				main(int argc, char **argv)
 			return (0);
 		else
 		{
+			t_glob *lol = korzinka();
+			lol->av = argv;
+			korzinka()->av = argv;
 			signal_s();
 			if (terminal_define() == 0)
 				return (0);
 			else
 			{
-				print_argv(argv);
+				print_display(argv);
 				key_init();
 				reset_original();
 			}

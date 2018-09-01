@@ -37,7 +37,21 @@ typedef struct 			s_arg
 	char				*name;
 	int					click;
 	int					on;
+	struct s_arg		*next;
 }						t_arg;
+
+typedef struct 			s_glob
+{
+	char	**av;
+	t_arg	*arg;
+}						t_glob;
+
+t_glob			*korzinka(void);
+void			print_display(char **argv);
+t_arg			*ft_create_arg(char *name);
+t_arg			*ft_add_arg(t_arg **lst, char *name);
+void			print_list(t_arg *lst);
+t_arg			*argv_init(char **argv);
 
 void 			print_more(char **argv);
 void			print_argv(char **argv);

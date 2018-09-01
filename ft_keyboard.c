@@ -29,87 +29,32 @@ void			key_init()
 	}
 }
 
-int 			ft_count(char **argv)
+void			print_list(t_arg *lst)
 {
-	int	CP;
-	int	QW;
-	int	WML;
-	int	length;
-	int	N;
+	t_arg	*tmp;
 
-	QW = len(argv);
-	CP = QW - 1;
-	length = tgetnum("co");
-	WML = max_l(argv);
-	N = count_r_c(WML, CP);
-	return (N);
-}
-
-void			print_norm(char **argv)
-{
-	int QW;
-	int i;
-
-	i = 1;
-	QW = len(argv);
-	while (argv[i] && i <= QW)
+	tmp = lst;
+	while (tmp != NULL)
 	{
-		ft_putstr(argv[i]);
-		ft_putstr("    ");
-		i++;
+		ft_putendl(tmp->name);
+		tmp = tmp->next;
 	}
 }
 
-void			print_more(char **argv)
+t_glob *korzinka(void)
 {
-	int i;
-	int L;
-	int L1;
-	int length;
-	int WML;
+	static t_glob tmp;
 
-	i = 2;
-	L = tgetnum("co");
-	L1 = 2 * L;
-	WML = max_l(argv);
-	length = count_r_c(WML, (len(argv) - 1));
-	if (!((L <= length) && (length <= L1)))
-		i++;
-	L = 1;
-	length = 0;
-	WML = 0;
-	L1 = tgetnum("co");
-	while (argv[L] && WML <= i)
-	{
-		length = length + ft_strlen(argv[L]) + 4;
-		if (length <= L1)
-		{
-			tputs(argv[L], 1, re_putchar);
-			ft_putstr("    ");
-			L++;
-		}
-		else
-		{
-			ft_putstr("\n");
-			L1 = L1 + L1;
-			WML++;
-			i++;
-		}
-	}
+	return (&tmp);
 }
-
-void			print_argv(char **argv)
+void			print_display(char **argv)
 {
-	int i;
-	int n;
-	int L;
+	struct winsize sz;
+	t_arg *args;
 
-	i = 1;
-	n = ft_count(argv);
-	L = tgetnum("co");
-	if (n <= L)
-		print_norm(argv);
-	else
-		print_more(argv);
-	// Здесь должна быть формула для вывода
+	ioctl(0, TIOCGWINSZ, &sz);
+	tputs(tgetstr("cl", NULL), 1, re_putchar);
+	args = argv_init(argv);	
+	print_list(args);
+	//lst = NULL;
 }

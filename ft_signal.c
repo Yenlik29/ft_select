@@ -26,10 +26,18 @@ void			sighandler(int signum)
 		tputs(tgetstr("te", 0), 1, re_putchar);
 		tputs(tgetstr("ve", 0), 1, re_putchar);
 		printf(">suspended - need to work on it (fg)\n");
+		signal(SIGTSTP, SIG_DFL);
 		exit(0);
 	}
+	else if (signum == 19)
+	{
+		terminal_init();
+		terminal_define();
+		signal_s();
+		// print_list();
+	}
 	else if (signum == 28)
-		printf("RESIZE\n");
+		print_display(korzinka()->av);
 	else
 		signal(signum, SIG_IGN);
 }
