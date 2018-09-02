@@ -41,9 +41,9 @@ void			print_list(t_arg *lst)
 	}
 }
 
-t_glob *korzinka(void)
+t_link 			*korzinka(void)
 {
-	static t_glob tmp;
+	static t_link tmp;
 
 	return (&tmp);
 }

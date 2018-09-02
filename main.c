@@ -98,7 +98,7 @@ int				main(int argc, char **argv)
 			return (0);
 		else
 		{
-			t_glob *lol = korzinka();
+			t_link *lol = korzinka();
 			lol->av = argv;
 			korzinka()->av = argv;
 			signal_s();

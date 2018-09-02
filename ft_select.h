@@ -40,13 +40,13 @@ typedef struct 			s_arg
 	struct s_arg		*next;
 }						t_arg;
 
-typedef struct 			s_glob
+typedef struct 			s_link
 {
 	char	**av;
 	t_arg	*arg;
-}						t_glob;
+}						t_link;
 
-t_glob			*korzinka(void);
+t_link			*korzinka(void);
 void			print_display(char **argv);
 t_arg			*ft_create_arg(char *name);
 t_arg			*ft_add_arg(t_arg **lst, char *name);
