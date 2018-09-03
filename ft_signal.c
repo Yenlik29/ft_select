@@ -37,7 +37,7 @@ void			sighandler(int signum)
 		// print_list();
 	}
 	else if (signum == 28)
-		print_display(korzinka()->av);
+		print_display(korzinka()->arg);
 	else
 		signal(signum, SIG_IGN);
 }

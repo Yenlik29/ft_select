@@ -47,13 +47,18 @@ typedef struct 			s_link
 }						t_link;
 
 t_link			*korzinka(void);
-void			print_display(char **argv);
+int				get_col(struct winsize sz, int max_s);
+int 			get_row(int col_q, int q);
+void			print_display(t_arg *args);
+
+int				struct_col(t_arg *args);
 t_arg			*ft_create_arg(char *name);
 t_arg			*ft_add_arg(t_arg **lst, char *name);
 void			print_list(t_arg *lst);
 t_arg			*argv_init(char **argv);
 
-void 			print_more(char **argv);
+void			print_norm(t_arg *args, int row_q, int col_q);
+
 void			print_argv(char **argv);
 int 			ft_count(char **argv);
 void			key_init();
@@ -62,6 +67,7 @@ int 			reset_original();
 int 			terminal_define();
 int				terminal_init(void);
 
+int				max_strlen(t_arg *args);
 int				count_r_c(int WML, int CP);
 int				max_l(char	**argv);
 int				len(char **argv);
@@ -76,6 +82,7 @@ void			ft_error_noterm();
 void			ft_error_term_access();
 void			ft_error_termdef(char *termtype);
 
+void			ft_error_display_size(void);
 void			ft_error_tcsetattr(void);
 void			ft_error_isatty(void);
 

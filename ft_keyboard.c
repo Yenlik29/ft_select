@@ -47,14 +47,38 @@ t_link 			*korzinka(void)
 
 	return (&tmp);
 }
-void			print_display(char **argv)
+
+int				get_col(struct winsize sz, int max_s)
 {
-	struct winsize sz;
-	t_arg *args;
+	if ((sz.ws_col - 2) % (max_s + 2) != 0)
+		return ((sz.ws_col - 2) / (max_s + 2));
+	else
+		return ((sz.ws_col - 2) / ((max_s + 2) - 1));
+}
+
+void			print_display(t_arg *args)
+{
+	struct winsize	sz;
+	int 			max_s;
+	int 			col_q;
+	int				row_q;
+	int 			q;
 
 	ioctl(0, TIOCGWINSZ, &sz);
 	tputs(tgetstr("cl", NULL), 1, re_putchar);
-	args = argv_init(argv);	
-	print_list(args);
-	//lst = NULL;
+	max_s = max_strlen(args);
+	if (((max_s + 2) > (sz.ws_col - 4)) || (sz.ws_row < 1))
+	{
+		tputs(tgetstr("cl", NULL), 1, re_putchar);
+		ft_error_display_size();
+		return ;
+	}
+	q = struct_col(args);
+	col_q = get_col(sz, max_s);
+	row_q = get_row(col_q, q);
+	if (row_q > sz.ws_row)
+		printf("WAIT: on process\n");
+	else
+		print_norm(args, row_q, col_q);
+	// print_list(args);
 }

@@ -12,6 +12,22 @@
 
 #include "ft_select.h"
 
+int				max_strlen(t_arg *args)
+{
+	t_arg	*n;
+	int		max;
+
+	max = 0;
+	n = args;
+	while (n != NULL)
+	{
+		if (max < (int)ft_strlen(n->name))
+			max = (int)ft_strlen(n->name);
+		n = n->next;
+	}
+	return (max);
+}
+
 int				count_r_c(int WML, int CP)
 {
 	int N;

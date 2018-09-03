@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_2.c                                       :+:      :+:    :+:   */
+/*   ft_print1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybokina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/27 13:45:28 by ybokina           #+#    #+#             */
-/*   Updated: 2018/08/27 13:45:35 by ybokina          ###   ########.fr       */
+/*   Created: 2018/09/03 17:15:29 by ybokina           #+#    #+#             */
+/*   Updated: 2018/09/03 17:15:38 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void			ft_error_display_size(void)
+void			print_norm(t_arg *args, int row_q, int col_q)
 {
-	ft_putstr_fd("Window size error\n", 2);
-}
+	int		i;
+	int		c;
+	t_arg	*tmp;
 
-void			ft_error_isatty(void)
-{
-	ft_putstr_fd("isatty() error\n", 2);
-}
-
-void			ft_error_tcsetattr(void)
-{
-	ft_putstr_fd("tcsetattr() error\n", 2);
+	i = 0;
+	c = col_q;
+	tmp = args;
+	while (tmp != NULL)
+	{
+		while (row_q)
+		{
+			col_q = c;
+			while (col_q)
+			{
+				ft_putstr(tmp->name);
+				tmp = tmp->next;
+				ft_putstr("  ");
+				col_q--;
+			}
+			ft_putstr("\n");
+			row_q--;
+		}
+	}
 }

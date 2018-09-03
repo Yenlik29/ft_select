@@ -12,6 +12,33 @@
 
 #include "ft_select.h"
 
+int				struct_col(t_arg *args)
+{
+	int i;
+	t_arg *s;
+
+	i = 0;
+	s = args;
+	while (s != NULL)
+	{
+		i++;
+		s = s->next;
+	}
+	return (i);
+}
+
+int 			get_row(int col_q, int q)
+{
+	int row_q;
+
+	row_q = 0;
+	if (q % col_q != 0)
+		row_q = ((q / col_q) + 1);
+	else
+		row_q = (q / col_q);
+	return (row_q);
+}
+
 t_arg			*ft_create_arg(char *name)
 {
 	t_arg *new;

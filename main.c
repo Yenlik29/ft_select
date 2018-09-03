@@ -83,14 +83,12 @@ int				terminal_init(void)
 	return (success);
 }
 
-			// t_glob *lol = korzinka();
-			// lol->av = argv;
-			// korzinka()->av = argv;
-
 int				main(int argc, char **argv)
 {
+	t_arg *args;
 	int ret;
 
+	args = NULL;
 	(argc < 2) ? ft_error_quantity() : NULL;
 	if (argc > 1)
 	{
@@ -98,15 +96,14 @@ int				main(int argc, char **argv)
 			return (0);
 		else
 		{
-			t_link *lol = korzinka();
-			lol->av = argv;
-			korzinka()->av = argv;
 			signal_s();
+			args = argv_init(argv);
+			korzinka()->arg = args;
 			if (terminal_define() == 0)
 				return (0);
 			else
 			{
-				print_display(argv);
+				print_display(args);
 				key_init();
 				reset_original();
 			}
