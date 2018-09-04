@@ -76,9 +76,10 @@ void			print_display(t_arg *args)
 	q = struct_col(args);
 	col_q = get_col(sz, max_s);
 	row_q = get_row(col_q, q);
-	if (row_q > sz.ws_row)
-		printf("WAIT: on process\n");
-	else
-		print_norm(args, row_q, col_q);
-	// print_list(args);
+	print_norm(args, row_q, col_q);
+	// if (row_q > sz.ws_row)
+	// 	printf("WAIT: on process\n");
+	// else
+	// 	print_norm(args, row_q, col_q);
+	//print_list(args);
 }
