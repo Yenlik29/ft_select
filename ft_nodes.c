@@ -31,7 +31,7 @@ int 			get_row(int col_q, int q)
 {
 	int row_q;
 
-	row_q = 0;
+	row_q = 1;
 	if (q % col_q != 0)
 		row_q = ((q / col_q) + 1);
 	else

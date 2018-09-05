@@ -12,6 +12,36 @@
 
 #include "ft_select.h"
 
+void			print_more(t_arg *args, int col_q, struct winsize sz)
+{
+	int		i;
+	int		c;
+	int		dif;
+	t_arg	*tmp;
+
+	i = 0;
+	c = col_q;
+	tmp = args;
+	while (i++ <= (sz.ws_row - 2) && tmp)
+	{
+		while (col_q--)
+		{
+			if (tmp)
+			{
+				ft_putstr(tmp->name);
+				if (max_strlen(args) >= (int)ft_strlen(tmp->name))
+					dif = max_strlen(args) - (int)ft_strlen(tmp->name);
+				print_dif(dif);
+				tmp = tmp->next;
+				ft_putstr("  ");
+			}
+		}
+		col_q = c;
+		ft_putstr("\n");
+	}
+	ft_putstr("...");
+}
+
 void			print_dif(int dif)
 {
 	while (dif)

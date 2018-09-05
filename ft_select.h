@@ -57,8 +57,9 @@ t_arg			*ft_add_arg(t_arg **lst, char *name);
 void			print_list(t_arg *lst);
 t_arg			*argv_init(char **argv);
 
-void			print_norm(t_arg *args, int row_q, int col_q);
 void			print_dif(int dif);
+void			print_more(t_arg *args, int col_q, struct winsize sz);
+void			print_norm(t_arg *args, int row_q, int col_q);
 
 void			print_argv(char **argv);
 int 			ft_count(char **argv);
