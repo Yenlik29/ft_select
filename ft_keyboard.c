@@ -14,18 +14,16 @@
 
 void			key_init()
 {
-	int	nread;
-	int	ch;
+	// int		nread;
+	char	*ch;
+	int 	k;
 
-	ch = 0;
+	k = 0;
 	while (1)
 	{
-		nread = read(0, &ch, 1);
-		if (ch == ESC)
-		{
-			reset_original();
-			exit(0);
-		}
+		ch = read_input();
+		printf("->%s\n", ch);
+		// nread = read_input();
 	}
 }
 

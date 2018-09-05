@@ -27,10 +27,10 @@
 # include	<sys/ioctl.h>
 # include	"libft/libft.h"
 # define 	ESC 27
-# define 	UP 72
-# define 	DOWN 80
-# define 	RIGHT 77
-# define 	LEFT 75
+# define 	A 65
+# define 	B 66
+# define 	C 67
+# define 	D 68
 
 typedef struct 			s_arg
 {
@@ -45,6 +45,8 @@ typedef struct 			s_link
 	char	**av;
 	t_arg	*arg;
 }						t_link;
+
+char 			*read_input();
 
 t_link			*korzinka(void);
 int				get_col(struct winsize sz, int max_s);
