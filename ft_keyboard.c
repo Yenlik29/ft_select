@@ -14,15 +14,34 @@
 
 void			key_init()
 {
-	// int		nread;
-	char	*ch;
-	int 	k;
+	// struct termios original;
+	int key;
 
-	k = 0;
 	while (1)
 	{
-		ch = read_input();
-		printf("->%s\n", ch);
+		read(0, &key, 8);
+		printf("%d\n", key);
+		if (key == 32539)
+		{
+			// tcgetattr(0, &original);
+			// original.c_lflag |= ICANON;
+			// original.c_lflag |= ECHO;
+			// original.c_cc[VMIN] = 1;
+			// tcsetattr(0, TCSANOW, &original);
+			// tputs(tgetstr("te", 0), 1, re_putchar);
+			// tputs(tgetstr("ve", 0), 1, re_putchar);
+			// printf(">suspended - need to work on it (fg)\n");
+			// signal(SIGTSTP, SIG_DFL);
+			exit(0);
+		}
+		if (key == 4283163)
+			printf("UP!\n");
+		if (key == 4348699)
+			printf("DOWN!\n");
+		if (key == 4414235)
+			printf("RIGHT!\n");
+		if (key == 4479771)
+			printf("LEFT!\n");
 		// nread = read_input();
 	}
 }

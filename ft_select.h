@@ -46,7 +46,7 @@ typedef struct 			s_link
 	t_arg	*arg;
 }						t_link;
 
-char 			*read_input();
+int 			read_input();
 
 t_link			*korzinka(void);
 int				get_col(struct winsize sz, int max_s);
