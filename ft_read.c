@@ -12,6 +12,37 @@
 
 #include "ft_select.h"
 
+void			ft_select_item(t_arg **args)
+{
+	t_arg *tmp;
+
+	tmp = *args;
+	while (tmp)
+	{
+		if (tmp->click == 1)
+		{
+			if (tmp->on == 1)
+			{
+				tmp->click = 0;
+				korzinka()->arg = *args;
+				return ;
+			}
+		}
+		else if (tmp->click == 0)
+		{
+			if (tmp->on == 1)
+			{
+				tmp->click = 1;
+				tmp->on = 0;
+				tmp->next->on = 1;
+				korzinka()->arg = *args;
+				return ;
+			}
+		}
+		tmp = tmp->next;
+	}
+}
+
 void			ft_up(t_arg **args)
 {
 	int				count;

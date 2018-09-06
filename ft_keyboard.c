@@ -20,6 +20,8 @@ void			key_init()
 	{
 		key = 0;
 		read(0, &key, 8);
+		if (key == 32)
+			ft_select_item(&korzinka()->arg);
 		if (key == ESC)
 		{
 			reset_original();

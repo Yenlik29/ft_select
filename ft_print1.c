@@ -28,11 +28,17 @@ void			print_more(t_arg *args, int col_q, struct winsize sz)
 		{
 			if (tmp)
 			{
+				if (tmp->click == 1)
+					ft_putstr(C_RED);
+				if (tmp->click == 0)
+					ft_putstr(C_NONE);
 				if (tmp->on == 1)
 					tputs(tgetstr("us", 0), 1, re_putchar);
 				ft_putstr(tmp->name);
 				if (tmp->on == 1)
 					tputs(tgetstr("me", 0), 1, re_putchar);
+				if (tmp->click == 1)
+					ft_putstr(C_NONE);
 				if (max_strlen(args) >= (int)ft_strlen(tmp->name))
 					dif = max_strlen(args) - (int)ft_strlen(tmp->name);
 				print_dif(dif);

@@ -35,6 +35,14 @@
 # define    DOWN 4348699
 # define    RIGHT 4414235
 # define    LEFT 4479771
+# define 	C_NONE		"\033[0m"
+# define 	C_RED		"\033[31m"
+# define 	C_GREEN	"\033[32m"
+# define 	C_BROWN	"\033[33m"
+# define 	C_BLUE		"\033[34m"
+# define 	C_WHITE	"\033[37m"
+# define 	C_CYAN		"\033[36m"
+# define 	C_MAGENTA	"\033[35"
 
 typedef struct 			s_arg
 {
@@ -78,6 +86,7 @@ void			ft_up(t_arg **args);
 void			ft_right(t_arg **args);
 void			ft_down(t_arg **args);
 void			ft_left(t_arg **args);
+void			ft_select_item(t_arg **args);
 
 int				max_strlen(t_arg *args);
 int				count_r_c(int WML, int CP);
