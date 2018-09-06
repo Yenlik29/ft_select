@@ -71,7 +71,11 @@ void			print_norm(t_arg *args, int row_q, int col_q)
 			{
 				if (tmp)
 				{
+					if (tmp->on == 1)
+						tputs(tgetstr("us", 0), 1, re_putchar);
 					ft_putstr(tmp->name);
+					if (tmp->on == 1)
+						tputs(tgetstr("me", 0), 1, re_putchar);
 					if (max_strlen(args) >= (int)ft_strlen(tmp->name))
 						dif = max_strlen(args) - (int)ft_strlen(tmp->name);
 					print_dif(dif);

@@ -12,6 +12,53 @@
 
 #include "ft_select.h"
 
+void			ft_up(t_arg **args)
+{
+	int 			count;
+	t_arg 			*tmp;
+	struct winsize	sz;
+	int 			max_s;
+	int 			col_q;
+
+	count = 0;
+	tmp = *args;
+	max_s = max_strlen(*args);
+	ioctl(0, TIOCGWINSZ, &sz);
+	col_q = get_col(sz, max_s);
+	while (tmp)
+	{
+		if (tmp->on == 0)
+			tmp = tmp->next;
+		if (tmp->on == 1)
+		{
+			tmp->on = 0;
+			while (count++ != col_q)
+				tmp = tmp->prev;
+			tmp->on = 1;
+			korzinka()->arg = *args;
+			return ;
+		}
+	}
+}
+
+void			ft_left(t_arg **args)
+{
+	t_arg *tmp;
+
+	tmp = *args;
+	while (tmp)
+	{
+		if (tmp->on == 1)
+		{
+			tmp->on = 0;
+			tmp->prev->on = 1;
+			korzinka()->arg = *args;
+			return;
+		}
+		tmp = tmp->next;
+	}
+}
+
 void			ft_down(t_arg **args)
 {
 	t_arg 			*tmp;
@@ -28,7 +75,7 @@ void			ft_down(t_arg **args)
 	while (tmp)
 	{
 		if (tmp->on == 0)
-				tmp = tmp->next;
+			tmp = tmp->next;
 		if (tmp->on == 1)
 		{
 			tmp->on = 0;

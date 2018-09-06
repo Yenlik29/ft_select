@@ -28,13 +28,13 @@ void			key_init()
 			exit(0);
 		}
 		if (key == UP)
-			printf("UP!\n");
+			ft_up(&korzinka()->arg);
 		if (key == DOWN)
 			ft_down(&korzinka()->arg);
 		if (key == RIGHT)
 			ft_right(&korzinka()->arg);
 		if (key == LEFT)
-			printf("LEFT!\n");
+			ft_left(&korzinka()->arg);
 		print_display(korzinka()->arg);
 		// nread = read_input();
 	}

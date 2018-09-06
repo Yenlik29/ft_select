@@ -42,6 +42,7 @@ typedef struct 			s_arg
 	int					click;
 	int					on;
 	struct s_arg		*next;
+	struct s_arg		*prev;
 }						t_arg;
 
 typedef struct 			s_link
@@ -57,7 +58,7 @@ void			print_display(t_arg *args);
 
 int				struct_col(t_arg *args);
 t_arg			*ft_create_arg(char *name);
-t_arg			*ft_add_arg(t_arg **lst, char *name);
+t_arg			*ft_add_arg(t_arg *lst, char *name);
 void			print_list(t_arg *lst);
 t_arg			*argv_init(char **argv);
 
@@ -73,8 +74,10 @@ int 			reset_original();
 int 			terminal_define();
 int				terminal_init(void);
 
+void			ft_up(t_arg **args);
 void			ft_right(t_arg **args);
 void			ft_down(t_arg **args);
+void			ft_left(t_arg **args);
 
 int				max_strlen(t_arg *args);
 int				count_r_c(int WML, int CP);
