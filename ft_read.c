@@ -12,31 +12,49 @@
 
 #include "ft_select.h"
 
-int 			read_input()
+void			ft_down(t_arg **args)
 {
-	int key;
+	t_arg 			*tmp;
+	int				count;
+	struct winsize	sz;
+	int 			max_s;
+	int 			col_q;
 
-	key = 0;
-	printf("%d\n", key);
-	return (1);
+	count = 0;
+	tmp = *args;
+	max_s = max_strlen(*args);
+	ioctl(0, TIOCGWINSZ, &sz);
+	col_q = get_col(sz, max_s);
+	while (tmp)
+	{
+		if (tmp->on == 0)
+				tmp = tmp->next;
+		if (tmp->on == 1)
+		{
+			tmp->on = 0;
+			while (count++ != col_q)
+				tmp = tmp->next;
+			tmp->on = 1;
+			korzinka()->arg = *args;
+			return ;
+		}
+	}
 }
 
-// char 				*read_input()
-// {
-// 	char ch;
-// 	int sz;
-// 	char *word;
+void			ft_right(t_arg **args)
+{
+	t_arg *tmp;
 
-// 	word = ft_strnew(4096);
-// 	printf("\n");
-// 	while ((sz = read(0, &ch, 1)) > 0)
-// 	{
-// 		printf("*\n");
-// 		if (ch == 27)
-// 			printf("yes\n");
-// 		else
-// 			printf("!\n");
-// 		word = ft_strncat(word, &ch, 1);
-// 	}
-// 	return (word);
-// }
+	tmp = *args;
+	while (tmp)
+	{
+		if (tmp->on == 1)
+		{
+			tmp->on = 0;
+			tmp->next->on = 1;
+			korzinka()->arg = *args;
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}

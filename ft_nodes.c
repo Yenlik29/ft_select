@@ -47,7 +47,7 @@ t_arg			*ft_create_arg(char *name)
 		return (NULL);
 	new->name = ft_strdup(name);
 	new->click = 0;
-	new->on = 0;
+	new->on = 1;
 	new->next = NULL;
 	return (new);
 }

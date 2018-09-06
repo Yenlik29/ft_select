@@ -31,6 +31,10 @@
 # define 	B 66
 # define 	C 67
 # define 	D 68
+# define    UP 4283163
+# define    DOWN 4348699
+# define    RIGHT 4414235
+# define    LEFT 4479771
 
 typedef struct 			s_arg
 {
@@ -45,8 +49,6 @@ typedef struct 			s_link
 	char	**av;
 	t_arg	*arg;
 }						t_link;
-
-int 			read_input();
 
 t_link			*korzinka(void);
 int				get_col(struct winsize sz, int max_s);
@@ -70,6 +72,9 @@ void			key_init();
 int 			reset_original();
 int 			terminal_define();
 int				terminal_init(void);
+
+void			ft_right(t_arg **args);
+void			ft_down(t_arg **args);
 
 int				max_strlen(t_arg *args);
 int				count_r_c(int WML, int CP);
