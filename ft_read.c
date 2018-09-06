@@ -14,11 +14,11 @@
 
 void			ft_up(t_arg **args)
 {
-	int 			count;
-	t_arg 			*tmp;
+	int				count;
+	t_arg			*tmp;
 	struct winsize	sz;
-	int 			max_s;
-	int 			col_q;
+	int				max_s;
+	int				col_q;
 
 	count = 0;
 	tmp = *args;
@@ -53,7 +53,7 @@ void			ft_left(t_arg **args)
 			tmp->on = 0;
 			tmp->prev->on = 1;
 			korzinka()->arg = *args;
-			return;
+			return ;
 		}
 		tmp = tmp->next;
 	}
@@ -61,11 +61,11 @@ void			ft_left(t_arg **args)
 
 void			ft_down(t_arg **args)
 {
-	t_arg 			*tmp;
+	t_arg			*tmp;
 	int				count;
 	struct winsize	sz;
-	int 			max_s;
-	int 			col_q;
+	int				max_s;
+	int				col_q;
 
 	count = 0;
 	tmp = *args;
