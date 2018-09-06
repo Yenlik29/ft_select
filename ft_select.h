@@ -86,6 +86,8 @@ void			ft_up(t_arg **args);
 void			ft_right(t_arg **args);
 void			ft_down(t_arg **args);
 void			ft_left(t_arg **args);
+void			ft_del(t_arg **args);
+t_arg			*make_cycle(t_arg *lst, int i);
 void			ft_select_item(t_arg **args);
 
 int				max_strlen(t_arg *args);

@@ -20,6 +20,9 @@ void			key_init()
 	{
 		key = 0;
 		read(0, &key, 8);
+		printf("%d\n", key);
+		if (key == 127)
+			ft_del(&korzinka()->arg);
 		if (key == 32)
 			ft_select_item(&korzinka()->arg);
 		if (key == ESC)
