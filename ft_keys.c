@@ -31,8 +31,8 @@ t_arg			*make_cycle(t_arg *lst, int i)
 		if (l == i)
 		{
 			printf("*\n");
-			// tmp->next = head;
-			// head->prev = tmp;
+			tmp->next = head;
+			head->prev = tmp;
 		}
 	}
 	return (lst);

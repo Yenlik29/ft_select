@@ -14,13 +14,15 @@
 
 void			key_init()
 {
-	int key;
+	long key;
 
 	while (1)
 	{
 		key = 0;
 		read(0, &key, 8);
-		printf("%d\n", key);
+		printf("%ld\n", key);
+		if (key == 2117294875)
+			exit(0);
 		if (key == 127)
 			ft_del(&korzinka()->arg);
 		if (key == 32)
@@ -41,7 +43,6 @@ void			key_init()
 		if (key == LEFT)
 			ft_left(&korzinka()->arg);
 		print_display(korzinka()->arg);
-		// nread = read_input();
 	}
 }
 

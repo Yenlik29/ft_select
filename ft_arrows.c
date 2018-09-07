@@ -24,6 +24,8 @@ void			ft_select_item(t_arg **args)
 			if (tmp->on == 1)
 			{
 				tmp->click = 0;
+				tmp->on = 0;
+				tmp->next->on = 1;
 				korzinka()->arg = *args;
 				return ;
 			}
