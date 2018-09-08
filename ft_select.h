@@ -49,13 +49,15 @@ typedef struct 			s_arg
 	char				*name;
 	int					click;
 	int					on;
+	int					j;
 	struct s_arg		*next;
 	struct s_arg		*prev;
 }						t_arg;
 
 typedef struct 			s_link
 {
-	int		j;
+	int 	j;
+	int 	l;
 	char	**av;
 	t_arg	*arg;
 }						t_link;
@@ -70,12 +72,12 @@ void			print_display(t_arg *args);
 
 int				struct_col(t_arg *args);
 t_arg			*ft_create_arg(char *name);
-t_arg			*ft_add_arg(t_arg *lst, char *name);
+t_arg			*ft_add_arg(t_arg *lst, char *name, int i);
 void			print_list(t_arg *lst);
 t_arg			*argv_init(char **argv);
 
 int				column(t_arg *tmp);
-int				find_row(t_arg *args);
+int				find_row(t_arg *args, int j);
 void			print_dif(int dif);
 void			print_more(t_arg *args, int col_q, struct winsize sz);
 void			print_norm(t_arg *args, int row_q, int col_q);

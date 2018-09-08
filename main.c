@@ -89,6 +89,7 @@ int				main(int argc, char **argv)
 	int ret;
 
 	args = NULL;
+	korzinka()->l = 1;
 	(argc < 2) ? ft_error_quantity() : NULL;
 	if (argc > 1)
 	{
@@ -99,7 +100,6 @@ int				main(int argc, char **argv)
 			signal_s();
 			args = argv_init(argv);
 			korzinka()->arg = args;
-			korzinka()->j = 1;
 			if (terminal_define() == 0)
 				return (0);
 			else

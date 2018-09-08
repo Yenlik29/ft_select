@@ -48,12 +48,13 @@ t_arg			*ft_create_arg(char *name)
 	new->name = ft_strdup(name);
 	new->click = 0;
 	new->on = 1;
+	new->j = 1;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
 }
 
-t_arg			*ft_add_arg(t_arg *lst, char *name)
+t_arg			*ft_add_arg(t_arg *lst, char *name, int i)
 {
 	t_arg *new_node;
 	t_arg *temp;
@@ -69,6 +70,7 @@ t_arg			*ft_add_arg(t_arg *lst, char *name)
 	new_node->name = ft_strdup(name);
 	new_node->click = 0;
 	new_node->on = 0;
+	new_node->j = i;
 	while (temp->next != NULL)
 		temp = temp->next;
 	temp->next = new_node;
@@ -87,10 +89,10 @@ t_arg			*argv_init(char **argv)
 	{
 		if (new == NULL)
 			new = ft_create_arg(argv[i]);
-		else
-			new = ft_add_arg(new, argv[i]);
+		else	
+			new = ft_add_arg(new, argv[i], i);
 		i++;
 	}
-	new = make_cycle(new, i);
+	// new = make_cycle(new, i);
 	return (new);
 }
