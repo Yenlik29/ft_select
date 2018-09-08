@@ -58,13 +58,6 @@ void			print_list(t_arg *lst)
 	}
 }
 
-t_link 			*korzinka(void)
-{
-	static t_link tmp;
-
-	return (&tmp);
-}
-
 int				get_col(struct winsize sz, int max_s)
 {
 	if ((sz.ws_col - 2) % (max_s + 2) != 0)

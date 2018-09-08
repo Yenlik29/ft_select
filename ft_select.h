@@ -55,11 +55,15 @@ typedef struct 			s_arg
 
 typedef struct 			s_link
 {
+	int		j;
 	char	**av;
 	t_arg	*arg;
 }						t_link;
 
 t_link			*korzinka(void);
+int				st_int();
+
+
 int				get_col(struct winsize sz, int max_s);
 int 			get_row(int col_q, int q);
 void			print_display(t_arg *args);
