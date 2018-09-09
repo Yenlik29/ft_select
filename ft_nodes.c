@@ -93,6 +93,7 @@ t_arg			*argv_init(char **argv)
 			new = ft_add_arg(new, argv[i], i);
 		i++;
 	}
+	korzinka()->i = i;
 	// new = make_cycle(new, i);
 	return (new);
 }

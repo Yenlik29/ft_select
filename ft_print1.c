@@ -79,70 +79,54 @@ int				max_row(t_arg *lst)
 	return (row);
 }
 
+int				find_act(t_arg *args)
+{
+	int		i;
+	t_arg 	*tmp;
+
+	i = 1;
+	tmp = args;
+	while (tmp)
+	{
+		if (tmp->on == 1)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
 void			print_more(t_arg *args, int col_q, struct winsize sz)
 {
-	int		count;
 	int		i;
 	int		j;
 	int		c;
-	int		row;
 	int		dif;
 	t_arg	*tmp;
-	t_arg	*lst;
 
-	i = 0;
+	j = 1;
+	i = find_act(args);
 	c = col_q;
 	tmp = args;
-	lst = args;
-	row = 1;
-	j = 0;
-	count = 0;
-	while (i++ <= (sz.ws_row - 2) && tmp)
+	while (i--)
+		tmp = tmp->next;
+	while (tmp && sz.ws_row--)
 	{
+		col_q = c;
 		while (col_q--)
 		{
 			if (tmp)
 			{
-				if (korzinka()->l != 1)
-				{
-					count = 0;
-					while (count++ <= korzinka()->j)
-						tmp = tmp->next;
-				}
-				row = find_row(lst, tmp->j);
-				ft_putnbr(row);
-				ft_putstr(":");
-				ft_putnbr(korzinka()->l);
-				if (row <= ((sz.ws_row - 1) * korzinka()->l))
-				{
-					(korzinka()->l != 1) ? row++ : row;
-					if (tmp->click == 1)
-						ft_putstr(C_RED);
-					if (tmp->click == 0)
-						ft_putstr(C_NONE);
-					if (tmp->on == 1)
-						tputs(tgetstr("us", 0), 1, re_putchar);
-					ft_putstr(tmp->name);
-					if (tmp->on == 1)
-						tputs(tgetstr("me", 0), 1, re_putchar);
-					if (tmp->click == 1)
-						ft_putstr(C_NONE);
-					if (max_strlen(args) >= (int)ft_strlen(tmp->name))
-						dif = max_strlen(args) - (int)ft_strlen(tmp->name);
-					print_dif(dif);
-					tmp = tmp->next;
-					korzinka()->j = tmp->j;
-					j++;
-				}
-				else
-				{
-					korzinka()->l++;
-					ft_putnbr(korzinka()->l);
-				}
+				settings_on(tmp);
+				ft_putstr(tmp->name);
+				settings_off(tmp);
+				if (max_strlen(args) >= (int)ft_strlen(tmp->name))
+					dif = max_strlen(args) - (int)ft_strlen(tmp->name);
+				print_dif(dif);
+				tmp = tmp->next;
+				ft_putstr(" ");
 			}
 		}
 		ft_putstr("\n");
-		col_q = c;
 	}
 	ft_putstr("...");
 }
@@ -151,49 +135,55 @@ void			print_dif(int dif)
 {
 	while (dif)
 	{
-		ft_putstr(" ");
+		ft_putstr("*");
 		dif--;
 	}
 }
 
-void			print_norm(t_arg *args, int row_q, int col_q)
+void			settings_on(t_arg *tmp)
 {
-	int		c;
-	int		row;
-	int		dif;
-	t_arg	*tmp;
+	if (tmp->click == 1)
+		ft_putstr(C_RED);
+	if (tmp->click == 0)
+		ft_putstr(C_NONE);
+	if (tmp->on == 1)
+		tputs(tgetstr("us", 0), 1, re_putchar);
+}
 
-	row = 0;
-	c = col_q;
+void			settings_off(t_arg *tmp)
+{
+	if (tmp->on == 1)
+		tputs(tgetstr("me", 0), 1, re_putchar);
+	if (tmp->click == 1)
+		ft_putstr(C_NONE);
+}
+
+void			print_norm(t_arg *args, int col_q)
+{
+	int 	dif;
+	int		col;
+	t_arg 	*tmp;
+
+	col = col_q;
 	tmp = args;
 	while (tmp)
 	{
-		while (row_q--)
+		col_q = col;
+		while (col_q--)
 		{
-			while (col_q--)
+			if (tmp)
 			{
-				if (tmp)
-				{
-					if (tmp->click == 1)
-						ft_putstr(C_RED);
-					if (tmp->click == 0)
-						ft_putstr(C_NONE);
-					if (tmp->on == 1)
-						tputs(tgetstr("us", 0), 1, re_putchar);
-					ft_putstr(tmp->name);
-					if (tmp->on == 1)
-						tputs(tgetstr("me", 0), 1, re_putchar);
-					if (tmp->click == 1)
-						ft_putstr(C_NONE);
-					if (max_strlen(args) >= (int)ft_strlen(tmp->name))
-						dif = max_strlen(args) - (int)ft_strlen(tmp->name);
-					print_dif(dif);
-					tmp = tmp->next;
-					ft_putstr("  ");
-				}
+				settings_on(tmp);
+				ft_putstr(tmp->name);
+				settings_off(tmp);
+				if (max_strlen(args) >= (int)ft_strlen(tmp->name))
+					dif = max_strlen(args) - (int)ft_strlen(tmp->name);
+				print_dif(dif);
+				tmp = tmp->next;
+				ft_putstr(" ");
 			}
-			col_q = c;
-			ft_putstr("\n");
 		}
+		ft_putstr("\n");
 	}
 }
+

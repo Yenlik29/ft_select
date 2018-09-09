@@ -56,6 +56,8 @@ typedef struct 			s_arg
 
 typedef struct 			s_link
 {
+	int 	i;
+	int 	k;
 	int 	j;
 	int 	l;
 	char	**av;
@@ -65,6 +67,8 @@ typedef struct 			s_link
 t_link			*korzinka(void);
 int				st_int();
 
+void			settings_on(t_arg *tmp);
+void			settings_off(t_arg *tmp);
 
 int				get_col(struct winsize sz, int max_s);
 int 			get_row(int col_q, int q);
@@ -80,7 +84,7 @@ int				column(t_arg *tmp);
 int				find_row(t_arg *args, int j);
 void			print_dif(int dif);
 void			print_more(t_arg *args, int col_q, struct winsize sz);
-void			print_norm(t_arg *args, int row_q, int col_q);
+void			print_norm(t_arg *args, int col_q);
 
 void			print_argv(char **argv);
 int 			ft_count(char **argv);

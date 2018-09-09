@@ -60,10 +60,10 @@ void			print_list(t_arg *lst)
 
 int				get_col(struct winsize sz, int max_s)
 {
-	if ((sz.ws_col - 2) % (max_s + 2) != 0)
-		return ((sz.ws_col - 2) / (max_s + 2));
+	if (sz.ws_col % (max_s + 1) != 0)
+		return (sz.ws_col / (max_s + 1));
 	else
-		return ((sz.ws_col - 2) / ((max_s + 2) - 1));
+		return (sz.ws_col / (max_s + 1));
 }
 
 void			print_display(t_arg *args)
@@ -86,9 +86,16 @@ void			print_display(t_arg *args)
 	q = struct_col(args);
 	col_q = get_col(sz, max_s);
 	row_q = get_row(col_q, q);
+	// ft_putnbr(sz.ws_row);
+	// ft_putstr("|");
+	// ft_putnbr(max_s);
+	// ft_putstr("|");
+	// ft_putnbr(col_q);
+	// ft_putstr("|");
+	// ft_putnbr(row_q);
+	// ft_putstr("\n");
 	if (row_q > sz.ws_row)
 		print_more(args, col_q, sz);
 	else
-		print_norm(args, row_q, col_q);
-	//print_list(args);
+		print_norm(args, col_q);
 }

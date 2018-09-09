@@ -84,7 +84,14 @@ void			ft_left(t_arg **args)
 		if (tmp->on == 1)
 		{
 			tmp->on = 0;
-			tmp->prev->on = 1;
+			if (!tmp->prev)
+			{
+				while (tmp->next)
+					tmp = tmp->next;
+				tmp->on = 1;
+			}
+			else
+				tmp->prev->on = 1;
 			korzinka()->arg = *args;
 			return ;
 		}
@@ -131,7 +138,14 @@ void			ft_right(t_arg **args)
 		if (tmp->on == 1)
 		{
 			tmp->on = 0;
-			tmp->next->on = 1;
+			if (!tmp->next)
+			{
+				while (tmp->prev)
+					tmp = tmp->prev;
+				tmp->on = 1;
+			}
+			else
+				tmp->next->on = 1;
 			korzinka()->arg = *args;
 			return ;
 		}
