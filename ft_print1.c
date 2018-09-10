@@ -81,55 +81,51 @@ int				max_row(t_arg *lst)
 
 int				find_act(t_arg *args, int col_q)
 {
-	int		i;
+	int		row;
 	int		j;
-	int		c;
+	int		col;
 	t_arg 	*tmp;
 
-	i = 1;
-	j = 1;
-	c = col_q;
+	row = 1;
 	tmp = args;
 	while (tmp)
 	{
-		j = 0;
-		while (j != col_q)
+		col = 0;
+		while (col <= col_q)
 		{
 			if (tmp->on == 1)
-				return (i);
-			j++;
-			tmp = tmp->next;
-			col_q--;
+				j = row;
+			if (col == col_q)
+				row++;
+			col++;
 		}
-		col_q = c;
-		i++;
+		tmp = tmp->next;
 	}
-	return (i);
+	if (j % col_q != 0)
+		row = (j / col_q) + 1;
+	else
+		row = j / col_q;
+	return (row);
 }
 
 void			print_more(t_arg *args, int col_q, struct winsize sz)
 {
-	int		i;
-	int		c;
-	int		j;
-	int		dif;
-	t_arg	*tmp;
+	int				i;
+	int				c;
+	int				dif;
+	t_arg			*tmp;
+	struct winsize	nw;
 
-	j = 0;
 	c = col_q;
 	tmp = args;
-	i = find_act(args, col_q);
-	ft_putstr(C_GREEN);
-	ft_putnbr(i);
-	ft_putstr(C_NONE);
-	while (i-- != 1)
-		tmp = tmp->next;
+	i = find_act(tmp, col_q);
+	ioctl(0, TIOCGWINSZ, &nw);
 	while (tmp && --sz.ws_row)
 	{
-		col_q = c;
-		while (col_q--)
+		if (tmp)
 		{
-			if (tmp)
+			col_q = c;
+			while (col_q--)
 			{
 				settings_on(tmp);
 				ft_putstr(tmp->name);
@@ -137,15 +133,15 @@ void			print_more(t_arg *args, int col_q, struct winsize sz)
 				if (max_strlen(args) >= (int)ft_strlen(tmp->name))
 					dif = max_strlen(args) - (int)ft_strlen(tmp->name);
 				print_dif(dif);
-				tmp = tmp->next;
 				ft_putstr(" ");
+				tmp = tmp->next;
 			}
+			ft_putstr("\n");
 		}
-		ft_putstr("\n");
 	}
-	dif = 0;
-	sz.ws_row = 0;
 	ft_putstr("...");
+	if ((i > nw.ws_row - 1) && (i <= korzinka()->i) && tmp)
+		print_display(tmp);
 }
 
 void			print_dif(int dif)

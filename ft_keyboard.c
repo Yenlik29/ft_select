@@ -20,7 +20,7 @@ void			key_init()
 	{
 		key = 0;
 		read(0, &key, 8);
-		printf("%ld\n", key);
+		// printf("%ld\n", key);
 		if (key == 2117294875)
 			exit(0);
 		if (key == 127)
@@ -42,7 +42,8 @@ void			key_init()
 			ft_right(&korzinka()->arg);
 		if (key == LEFT)
 			ft_left(&korzinka()->arg);
-		print_display(korzinka()->arg);
+		if (korzinka()->arg)
+			print_display(korzinka()->arg);
 	}
 }
 
@@ -86,15 +87,7 @@ void			print_display(t_arg *args)
 	q = struct_col(args);
 	col_q = get_col(sz, max_s);
 	row_q = get_row(col_q, q);
-	// ft_putnbr(sz.ws_row);
-	// ft_putstr("|");
-	// ft_putnbr(max_s);
-	// ft_putstr("|");
-	// ft_putnbr(col_q);
-	// ft_putstr("|");
-	// ft_putnbr(row_q);
-	// ft_putstr("\n");
-	if (row_q > sz.ws_row)
+	if (row_q > sz.ws_row && args)
 		print_more(args, col_q, sz);
 	else
 		print_norm(args, col_q);

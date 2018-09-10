@@ -12,6 +12,22 @@
 
 #include "ft_select.h"
 
+int 			row_init(t_arg *args)
+{
+	struct winsize	sz;
+	int 			max_s;
+	int 			col_q;
+	int				row_q;
+	int 			q;
+
+	ioctl(0, TIOCGWINSZ, &sz);
+	max_s = max_strlen(args);
+	q = struct_col(args);
+	col_q = get_col(sz, max_s);
+	row_q = get_row(col_q, q);
+	return (row_q);
+}
+
 int 			reset_original()
 {
 	struct termios original;
@@ -89,8 +105,6 @@ int				main(int argc, char **argv)
 	int ret;
 
 	args = NULL;
-	korzinka()->l = 1;
-	korzinka()->k = 1;
 	(argc < 2) ? ft_error_quantity() : NULL;
 	if (argc > 1)
 	{
@@ -100,6 +114,7 @@ int				main(int argc, char **argv)
 		{
 			signal_s();
 			args = argv_init(argv);
+			korzinka()->i = row_init(args);
 			korzinka()->arg = args;
 			if (terminal_define() == 0)
 				return (0);

@@ -99,21 +99,61 @@ void			ft_left(t_arg **args)
 	}
 }
 
+int				find(t_arg *lst, int col_q, int i)
+{
+	int	begin;
+	int	col;
+	t_arg *tmp;
+
+	col = 0;
+	begin = 0;
+	tmp = lst;
+	begin = (find_row(lst, i) - 1) * col_q;
+	begin++;
+	col = i - begin;
+	return (col);
+}
+
 void			ft_down(t_arg **args)
 {
+	int				i;
 	t_arg			*tmp;
+	t_arg			*lst;
 	int				count;
 	struct winsize	sz;
 	int				max_s;
 	int				col_q;
+	int				col;
 
-	count = 0;
+	i = 1;
+	count = 1;
+	col = 0;
 	tmp = *args;
-	max_s = max_strlen(*args);
+	lst = *args;
 	ioctl(0, TIOCGWINSZ, &sz);
+	max_s = max_strlen(*args);
 	col_q = get_col(sz, max_s);
 	while (tmp)
 	{
+		if (tmp->on == 1)
+			break ;
+		tmp = tmp->next;
+		i++;
+	}
+	while (tmp)
+	{
+		if (find_row(lst, i) == korzinka()->i)
+		{
+			col = find(lst, col_q, i);
+			tmp->on = 0;
+			while (i-- != 1)
+				tmp = tmp->prev;
+			while (i++ != col)
+				tmp = tmp->next;
+			tmp->on = 1;
+			korzinka()->arg = *args;
+			return ;
+		}
 		if (tmp->on == 0)
 			tmp = tmp->next;
 		if (tmp->on == 1)

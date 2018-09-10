@@ -57,9 +57,6 @@ typedef struct 			s_arg
 typedef struct 			s_link
 {
 	int 	i;
-	int 	k;
-	int 	j;
-	int 	l;
 	char	**av;
 	t_arg	*arg;
 }						t_link;
@@ -70,13 +67,14 @@ int				st_int();
 void			settings_on(t_arg *tmp);
 void			settings_off(t_arg *tmp);
 
+int				find_act(t_arg *args, int col_q);
 int				get_col(struct winsize sz, int max_s);
 int 			get_row(int col_q, int q);
 void			print_display(t_arg *args);
 
 int				struct_col(t_arg *args);
 t_arg			*ft_create_arg(char *name);
-t_arg			*ft_add_arg(t_arg *lst, char *name, int i);
+t_arg			*ft_add_arg(t_arg *lst, char *name);
 void			print_list(t_arg *lst);
 t_arg			*argv_init(char **argv);
 
