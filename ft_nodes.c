@@ -94,6 +94,5 @@ t_arg			*argv_init(char **argv)
 		i++;
 	}
 	korzinka()->i = i;
-	// new = make_cycle(new, i);
 	return (new);
 }

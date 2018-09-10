@@ -90,7 +90,7 @@ int				main(int argc, char **argv)
 
 	args = NULL;
 	korzinka()->l = 1;
-	korzinka()->k = 0;
+	korzinka()->k = 1;
 	(argc < 2) ? ft_error_quantity() : NULL;
 	if (argc > 1)
 	{

@@ -90,6 +90,7 @@ int				find_act(t_arg *args)
 	{
 		if (tmp->on == 1)
 			return (i);
+		tmp = tmp->next;
 		i++;
 	}
 	return (i);
@@ -98,18 +99,18 @@ int				find_act(t_arg *args)
 void			print_more(t_arg *args, int col_q, struct winsize sz)
 {
 	int		i;
-	int		j;
 	int		c;
+	int		j;
 	int		dif;
 	t_arg	*tmp;
 
-	j = 1;
-	i = find_act(args);
+	j = 0;
 	c = col_q;
 	tmp = args;
-	while (i--)
+	i = find_act(args);
+	while (i-- != 1)
 		tmp = tmp->next;
-	while (tmp && sz.ws_row--)
+	while (tmp && --sz.ws_row)
 	{
 		col_q = c;
 		while (col_q--)
@@ -135,7 +136,7 @@ void			print_dif(int dif)
 {
 	while (dif)
 	{
-		ft_putstr("*");
+		ft_putstr(" ");
 		dif--;
 	}
 }
