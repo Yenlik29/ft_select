@@ -50,26 +50,49 @@ void			ft_up(t_arg **args)
 	int				count;
 	t_arg			*tmp;
 	struct winsize	sz;
+	int				i;
 	int				max_s;
 	int				col_q;
+	t_arg			*lst;
 
+	i = 1;
 	count = 0;
+	lst = *args;
 	tmp = *args;
 	max_s = max_strlen(*args);
 	ioctl(0, TIOCGWINSZ, &sz);
 	col_q = get_col(sz, max_s);
 	while (tmp)
 	{
-		if (tmp->on == 0)
-			tmp = tmp->next;
 		if (tmp->on == 1)
+			break ;
+		tmp = tmp->next;
+		i++;
+	}
+	while (tmp)
+	{
+		if (find_row(lst, i) == 1)
 		{
 			tmp->on = 0;
-			while (count++ != col_q)
-				tmp = tmp->prev;
+			while (count++ != ((korzinka()->i - 1) * col_q))
+				tmp = tmp->next;
 			tmp->on = 1;
 			korzinka()->arg = *args;
 			return ;
+		}
+		else
+		{
+			if (tmp->on == 0)
+					tmp = tmp->next;
+				if (tmp->on == 1)
+				{
+					tmp->on = 0;
+					while (count++ != col_q)
+						tmp = tmp->prev;
+					tmp->on = 1;
+					korzinka()->arg = *args;
+					return ;
+				}
 		}
 	}
 }
@@ -126,7 +149,7 @@ void			ft_down(t_arg **args)
 	int				col;
 
 	i = 1;
-	count = 1;
+	count = 0;
 	col = 0;
 	tmp = *args;
 	lst = *args;
@@ -154,16 +177,19 @@ void			ft_down(t_arg **args)
 			korzinka()->arg = *args;
 			return ;
 		}
-		if (tmp->on == 0)
-			tmp = tmp->next;
-		if (tmp->on == 1)
+		else
 		{
-			tmp->on = 0;
-			while (count++ != col_q)
+			if (tmp->on == 0)
 				tmp = tmp->next;
-			tmp->on = 1;
-			korzinka()->arg = *args;
-			return ;
+			if (tmp->on == 1)
+			{
+				tmp->on = 0;
+				while (count++ != col_q)
+					tmp = tmp->next;
+				tmp->on = 1;
+				korzinka()->arg = *args;
+				return ;
+			}
 		}
 	}
 }
