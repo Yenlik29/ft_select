@@ -79,18 +79,29 @@ int				max_row(t_arg *lst)
 	return (row);
 }
 
-int				find_act(t_arg *args)
+int				find_act(t_arg *args, int col_q)
 {
 	int		i;
+	int		j;
+	int		c;
 	t_arg 	*tmp;
 
 	i = 1;
+	j = 1;
+	c = col_q;
 	tmp = args;
 	while (tmp)
 	{
-		if (tmp->on == 1)
-			return (i);
-		tmp = tmp->next;
+		j = 0;
+		while (j != col_q)
+		{
+			if (tmp->on == 1)
+				return (i);
+			j++;
+			tmp = tmp->next;
+			col_q--;
+		}
+		col_q = c;
 		i++;
 	}
 	return (i);
@@ -107,7 +118,10 @@ void			print_more(t_arg *args, int col_q, struct winsize sz)
 	j = 0;
 	c = col_q;
 	tmp = args;
-	i = find_act(args);
+	i = find_act(args, col_q);
+	ft_putstr(C_GREEN);
+	ft_putnbr(i);
+	ft_putstr(C_NONE);
 	while (i-- != 1)
 		tmp = tmp->next;
 	while (tmp && --sz.ws_row)
@@ -129,6 +143,8 @@ void			print_more(t_arg *args, int col_q, struct winsize sz)
 		}
 		ft_putstr("\n");
 	}
+	dif = 0;
+	sz.ws_row = 0;
 	ft_putstr("...");
 }
 
