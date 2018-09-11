@@ -14,8 +14,10 @@
 
 void			ft_select_item(t_arg **args)
 {
-	t_arg *tmp;
+	int		count;
+	t_arg 	*tmp;
 
+	count = 0;
 	tmp = *args;
 	while (tmp)
 	{
@@ -25,7 +27,14 @@ void			ft_select_item(t_arg **args)
 			{
 				tmp->click = 0;
 				tmp->on = 0;
-				tmp->next->on = 1;
+				if (!tmp->next)
+				{
+					while (tmp->prev)
+						tmp = tmp->prev;
+					tmp->on = 1;
+				}
+				else
+					tmp->next->on = 1;
 				korzinka()->arg = *args;
 				return ;
 			}
@@ -36,7 +45,14 @@ void			ft_select_item(t_arg **args)
 			{
 				tmp->click = 1;
 				tmp->on = 0;
-				tmp->next->on = 1;
+				if (!tmp->next)
+				{
+					while (tmp->prev)
+						tmp = tmp->prev;
+					tmp->on = 1;
+				}
+				else
+					tmp->next->on = 1;
 				korzinka()->arg = *args;
 				return ;
 			}
