@@ -74,20 +74,25 @@ void			ft_up(t_arg **args)
 		if (find_row(lst, i) == 1)
 		{
 			tmp->on = 0;
-			// ft_putnbr(((korzinka()->i - 1) * col_q));
-			// ft_putstr(":");
-			// ft_putnbr(col_q);
-			while (count != ((korzinka()->i - 1) * col_q))
+			if ((korzinka()->i - 1) * col_q + i > korzinka()->quant)
 			{
-				tmp = tmp->next;
-				count++;
+				while (tmp->next)
+					tmp = tmp->next;
+				tmp->on = 1;
+				korzinka()->arg = *args;
+				return ;
 			}
-			// ft_putnbr(count);
-			// ft_putstr(":");
-			// ft_putnbr(((korzinka()->i - 1) * col_q));
-			// tmp->on = 1;
-			// korzinka()->arg = *args;
-			// return ;
+			else
+			{
+				while (count != ((korzinka()->i - 1) * col_q))
+				{
+					tmp = tmp->next;
+					count++;
+				}
+			}
+			tmp->on = 1;
+			korzinka()->arg = *args;
+			return ;
 		}
 		else
 		{

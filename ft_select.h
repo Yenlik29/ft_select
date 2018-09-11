@@ -57,6 +57,7 @@ typedef struct 			s_arg
 typedef struct 			s_link
 {
 	int 	i;
+	int		quant;
 	char	**av;
 	t_arg	*arg;
 }						t_link;

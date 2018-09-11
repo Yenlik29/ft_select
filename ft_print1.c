@@ -173,14 +173,23 @@ void			settings_off(t_arg *tmp)
 
 void			print_norm(t_arg *args, int col_q)
 {
-	int 	dif;
-	int		col;
-	t_arg 	*tmp;
+	int				i;
+	int 			dif;
+	int				col;
+	t_arg 			*tmp;
+	struct winsize	sz;
 
+	i = 0;
 	col = col_q;
 	tmp = args;
-	while (tmp)
+	ioctl(0, TIOCGWINSZ, &sz);
+	while (tmp && i++ <= sz.ws_row)
 	{
+		// ft_putstr(C_RED);
+		// ft_putnbr(i);
+		// ft_putstr(":");
+		// ft_putnbr(sz.ws_row);
+		// ft_putstr(C_NONE);
 		col_q = col;
 		while (col_q--)
 		{
@@ -196,7 +205,8 @@ void			print_norm(t_arg *args, int col_q)
 				ft_putstr(" ");
 			}
 		}
-		ft_putstr("\n");
+		if (i != sz.ws_row)
+			ft_putstr("\n");
 	}
 }
 

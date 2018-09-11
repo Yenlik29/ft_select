@@ -12,6 +12,21 @@
 
 #include "ft_select.h"
 
+int 			quantity(t_arg *args)
+{
+	int 	i;
+	t_arg 	*tmp;
+
+	i = 0;
+	tmp = args;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
 void			key_init()
 {
 	long key;
@@ -19,6 +34,7 @@ void			key_init()
 	while (1)
 	{
 		key = 0;
+		korzinka()->quant = quantity(korzinka()->arg);
 		read(0, &key, 8);
 		// printf("%ld\n", key);
 		if (key == 2117294875)
@@ -87,7 +103,7 @@ void			print_display(t_arg *args)
 	q = struct_col(args);
 	col_q = get_col(sz, max_s);
 	row_q = get_row(col_q, q);
-	if (row_q > sz.ws_row && args)
+	if (row_q > sz.ws_row)
 		print_more(args, col_q, sz);
 	else
 		print_norm(args, col_q);
