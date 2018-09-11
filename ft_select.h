@@ -37,6 +37,7 @@
 # define    DOWN 4348699
 # define    RIGHT 4414235
 # define    LEFT 4479771
+# define 	BACK 2117294875
 # define 	C_NONE		"\033[0m"
 # define 	C_RED		"\033[31m"
 # define 	C_GREEN	"\033[32m"

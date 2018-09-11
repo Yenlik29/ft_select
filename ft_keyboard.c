@@ -38,9 +38,7 @@ void			key_init()
 		korzinka()->i = row_init(korzinka()->arg);
 		korzinka()->quant = quantity(korzinka()->arg);
 		// printf("|%ld|\n", key);
-		if (key == 2117294875)
-			exit(0);
-		if (key == DELETE)
+		if (key == DELETE || key == BACK)
 		{
 			ft_del(&korzinka()->arg);
 		}

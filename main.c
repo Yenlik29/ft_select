@@ -63,7 +63,6 @@ int 			terminal_define()
 		copy = original;
 		copy.c_lflag &= ~ICANON;
 		copy.c_lflag &= ~ECHO;
-		// copy.c_lflag &= ~ISIG;
 		copy.c_cc[VTIME] = 0;
 		copy.c_cc[VMIN] = 1;
 		if (tcsetattr(0, TCSANOW, &copy) != 0)

@@ -156,7 +156,7 @@ void			print_dif(int dif)
 void			settings_on(t_arg *tmp)
 {
 	if (tmp->click == 1)
-		ft_putstr(C_RED);
+		tputs(tgetstr("mr", NULL), 1, re_putchar);
 	if (tmp->click == 0)
 		ft_putstr(C_NONE);
 	if (tmp->on == 1)
@@ -185,11 +185,6 @@ void			print_norm(t_arg *args, int col_q)
 	ioctl(0, TIOCGWINSZ, &sz);
 	while (tmp && i++ <= sz.ws_row)
 	{
-		// ft_putstr(C_RED);
-		// ft_putnbr(i);
-		// ft_putstr(":");
-		// ft_putnbr(sz.ws_row);
-		// ft_putstr(C_NONE);
 		col_q = col;
 		while (col_q--)
 		{

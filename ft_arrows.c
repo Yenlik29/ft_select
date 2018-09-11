@@ -94,9 +94,6 @@ void			ft_up(t_arg **args)
 			{
 				while (tmp->next)
 					tmp = tmp->next;
-				tmp->on = 1;
-				korzinka()->arg = *args;
-				return ;
 			}
 			else
 			{
@@ -214,8 +211,16 @@ void			ft_down(t_arg **args)
 			if (tmp->on == 1)
 			{
 				tmp->on = 0;
-				while (count++ != col_q)
-					tmp = tmp->next;
+				if ((i + col_q) > korzinka()->quant)
+				{
+					while (tmp->next)
+						tmp = tmp->next;
+				}
+				else
+				{
+					while (count++ != col_q)
+						tmp = tmp->next;
+				}
 				tmp->on = 1;
 				korzinka()->arg = *args;
 				return ;
