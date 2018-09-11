@@ -68,6 +68,8 @@ typedef struct 			s_link
 t_link			*korzinka(void);
 int				st_int();
 
+void			enter(t_arg **args);
+
 void			settings_on(t_arg *tmp);
 void			settings_off(t_arg *tmp);
 int 			row_init(t_arg *args);

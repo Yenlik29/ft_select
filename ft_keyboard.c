@@ -37,11 +37,10 @@ void			key_init()
 		read(0, &key, 8);
 		korzinka()->i = row_init(korzinka()->arg);
 		korzinka()->quant = quantity(korzinka()->arg);
-		// printf("|%ld|\n", key);
+		if (key == 10)
+			enter(&korzinka()->arg);
 		if (key == DELETE || key == BACK)
-		{
 			ft_del(&korzinka()->arg);
-		}
 		if (key == SELECT)
 			ft_select_item(&korzinka()->arg);
 		if (key == ESC)
@@ -71,9 +70,11 @@ void			print_list(t_arg *lst)
 	tmp = lst;
 	while (tmp != NULL)
 	{
-		ft_putendl(tmp->name);
+		ft_putstr(tmp->name);
+		ft_putstr(" ");
 		tmp = tmp->next;
 	}
+	ft_putstr("\n");
 }
 
 int				get_col(struct winsize sz, int max_s)
