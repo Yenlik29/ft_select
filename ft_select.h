@@ -70,6 +70,7 @@ int				st_int();
 void			settings_on(t_arg *tmp);
 void			settings_off(t_arg *tmp);
 int 			row_init(t_arg *args);
+int 			quantity(t_arg *args);
 
 int				find_act(t_arg *args, int col_q);
 int				get_col(struct winsize sz, int max_s);

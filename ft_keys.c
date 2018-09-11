@@ -95,6 +95,11 @@ void			ft_del(t_arg **args)
 		i++;
 		cur = cur->next;
 	}
+	if (quantity(*args) == 1)
+	{
+		reset_original();
+		exit(0);
+	}
 	if (!cur)
 		return ;
 	deleteNode(args, cur);

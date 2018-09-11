@@ -14,30 +14,23 @@
 
 void			sighandler(int signum)
 {
-	struct termios original;
-
-	if (signum == 18)
+	if (signum == SIGTSTP)
 	{
-		tcgetattr(0, &original);
-		original.c_lflag |= ICANON;
-		original.c_lflag |= ECHO;
-		original.c_cc[VMIN] = 1;
-		tcsetattr(0, TCSANOW, &original);
-		tputs(tgetstr("te", 0), 1, re_putchar);
-		tputs(tgetstr("ve", 0), 1, re_putchar);
-		printf(">suspended - need to work on it (fg)\n");
+		reset_original();
 		signal(SIGTSTP, SIG_DFL);
-		exit(0);
+		ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
 	}
 	else if (signum == 19)
 	{
 		terminal_init();
 		terminal_define();
+		print_display(korzinka()->arg);
 		signal_s();
-		// print_list();
 	}
 	else if (signum == 28)
+	{
 		print_display(korzinka()->arg);
+	}
 	else
 		signal(signum, SIG_IGN);
 }
@@ -49,4 +42,5 @@ void			signal_s()
 	signal(SIGABRT, sighandler);
 	signal(SIGTSTP, sighandler);
 	signal(SIGWINCH, sighandler);
+	signal(SIGCONT, sighandler);
 }

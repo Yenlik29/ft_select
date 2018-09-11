@@ -32,6 +32,7 @@ int 			reset_original()
 {
 	struct termios original;
 
+	
 	tcgetattr(0, &original);
 	original.c_lflag |= ICANON;
 	original.c_lflag |= ECHO;
