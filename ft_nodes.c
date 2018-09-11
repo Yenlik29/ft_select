@@ -41,13 +41,17 @@ int 			get_row(int col_q, int q)
 
 t_arg			*ft_create_arg(char *name)
 {
-	t_arg *new;
+	t_arg 			*new;
+	struct stat		buf;
+	char			path[1024];
 
+	stat(realpath(name, path), &buf);
 	if (!(new = (t_arg *)malloc(sizeof(t_arg))))
 		return (NULL);
 	new->name = ft_strdup(name);
 	new->click = 0;
 	new->on = 1;
+	new->st_mode = buf.st_mode;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -55,9 +59,12 @@ t_arg			*ft_create_arg(char *name)
 
 t_arg			*ft_add_arg(t_arg *lst, char *name)
 {
-	t_arg *new_node;
-	t_arg *temp;
+	t_arg 			*temp;
+	t_arg 			*new_node;
+	struct stat		buf;
+	char			path[1024];
 
+	stat(realpath(name, path), &buf);
 	if (!(new_node = (t_arg *)malloc(sizeof(t_arg))))
 		return (NULL);
 	temp = lst;
@@ -69,6 +76,7 @@ t_arg			*ft_add_arg(t_arg *lst, char *name)
 	new_node->name = ft_strdup(name);
 	new_node->click = 0;
 	new_node->on = 0;
+	new_node->st_mode = buf.st_mode;
 	while (temp->next != NULL)
 		temp = temp->next;
 	temp->next = new_node;
@@ -79,8 +87,8 @@ t_arg			*ft_add_arg(t_arg *lst, char *name)
 
 t_arg			*argv_init(char **argv)
 {
-	t_arg	*new;
-	int		i;
+	int				i;
+	t_arg			*new;
 
 	i = 1;
 	new = NULL;

@@ -12,14 +12,26 @@
 
 #include "ft_select.h"
 
+void			ft_color(mode_t st_mode)
+{
+	S_ISBLK(st_mode) ? ft_putstr(C_RED) : NULL;
+	S_ISCHR(st_mode) ? ft_putstr(C_GREEN) : NULL;
+	S_ISDIR(st_mode) ? ft_putstr(C_PINK) : NULL;
+	S_ISFIFO(st_mode) ? ft_putstr(C_BLUE) : NULL;
+	S_ISREG(st_mode) ? ft_putstr(C_WHITE) : NULL;
+	S_ISLNK(st_mode) ? ft_putstr(C_CYAN) : NULL;
+	S_ISSOCK(st_mode) ? ft_putstr(C_MAGENTA) : NULL;
+	(st_mode & S_IXUSR && !S_ISDIR(st_mode)) ? ft_putstr(C_RED) : NULL;
+}
+
 void			print_beauty_start()
 {
-	ft_putstr("\033[01;38;05;181m");
-	ft_putstr("Greetings, dear friend! ");
-	ft_putstr("Here is your choice:\n");
-	ft_putstr("\033[5m");
-	ft_putstr("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-	ft_putstr(C_NONE);
+	ft_putstr_fd(C_PINK, 1);
+	ft_putstr_fd("Greetings, dear friend! ", 1);
+	ft_putstr_fd("Here is your choice:\n", 1);
+	ft_putstr_fd("\033[5m", 1);
+	ft_putstr_fd("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n", 1);
+	ft_putstr_fd(C_NONE, 1);
 }
 
 void			enter(t_arg **args)
@@ -45,15 +57,15 @@ void			enter(t_arg **args)
 	{
 		print_beauty_start();
 		print_list(new);
-		ft_putstr("\033[5m");
-		ft_putstr("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-		ft_putstr(C_NONE);
+		ft_putstr_fd("\033[5m", 1);
+		ft_putstr_fd("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n", 1);
+		ft_putstr_fd(C_NONE, 1);
 	}
 	else
 	{
-		ft_putstr("\033[01;38;05;181m");
-		ft_putstr("You didn't choose anything, my friend:(\n");
-		ft_putstr(C_NONE);
+		ft_putstr_fd(C_PINK, 1);
+		ft_putstr_fd("You didn't choose anything, my friend:(\n", 1);
+		ft_putstr_fd(C_NONE, 1);
 	}
 	exit(0);
 }

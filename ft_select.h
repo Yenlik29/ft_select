@@ -46,6 +46,8 @@
 # define 	C_WHITE	"\033[37m"
 # define 	C_CYAN		"\033[36m"
 # define 	C_MAGENTA	"\033[35"
+# define 	C_PINK   "\e[38;5;175m"
+# define 	C_PURPLE "\033[01;38;05;55m"
 
 typedef struct 			s_arg
 {
@@ -53,6 +55,7 @@ typedef struct 			s_arg
 	int					click;
 	int					on;
 	int					j;
+	mode_t				st_mode;
 	struct s_arg		*next;
 	struct s_arg		*prev;
 }						t_arg;
@@ -74,6 +77,7 @@ void			settings_on(t_arg *tmp);
 void			settings_off(t_arg *tmp);
 int 			row_init(t_arg *args);
 int 			quantity(t_arg *args);
+void			ft_color(mode_t st_mode);
 
 int				find_act(t_arg *args, int col_q);
 int				get_col(struct winsize sz, int max_s);

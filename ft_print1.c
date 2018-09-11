@@ -128,7 +128,9 @@ void			print_more(t_arg *args, int col_q, struct winsize sz)
 			while (col_q--)
 			{
 				settings_on(tmp);
+				ft_color(tmp->st_mode);
 				ft_putstr(tmp->name);
+				ft_putstr(C_NONE);
 				settings_off(tmp);
 				if (max_strlen(args) >= (int)ft_strlen(tmp->name))
 					dif = max_strlen(args) - (int)ft_strlen(tmp->name);
@@ -191,7 +193,9 @@ void			print_norm(t_arg *args, int col_q)
 			if (tmp)
 			{
 				settings_on(tmp);
+				ft_color(tmp->st_mode);
 				ft_putstr(tmp->name);
+				ft_putstr(C_NONE);
 				settings_off(tmp);
 				if (max_strlen(args) >= (int)ft_strlen(tmp->name))
 					dif = max_strlen(args) - (int)ft_strlen(tmp->name);
