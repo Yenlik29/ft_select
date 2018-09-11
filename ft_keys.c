@@ -38,45 +38,64 @@ t_arg			*make_cycle(t_arg *lst, int i)
 	return (lst);
 }
 
-void			ft_del(t_arg **args)
+int				where(t_arg **args)
 {
-	t_arg *tmp;
-	t_arg *del;
+	int		i;
+	t_arg 	*tmp;
 
-	del = NULL;
+	i = 1;
 	tmp = *args;
 	while (tmp)
 	{
 		if (tmp->on == 1)
-		{
-			del = tmp;
-			break ;
-		}
+			return (i);
 		tmp = tmp->next;
+		i++;
 	}
-	if (*args == NULL || del == NULL)
+	return (i);
+}
+
+void			deleteNode(t_arg **head, t_arg *del)
+{
+	if (*head == NULL || del == NULL)
 		return ;
-	if (*args == del) //начальный нод
+	if (*head == del && del->next)
 	{
-		(*args)->on = 0;
-		*args = del->next;
-		printf("*\n");
+		*head = del->next;
+		del->next->on = 1;
+		del->next->prev = NULL;
 	}
-	if (del->next != NULL) //средний нод
+	if (del->prev != NULL && del->next != NULL)
 	{
-		del->next->on = 0;
 		del->next->prev = del->prev;
-		del->next->prev->on = 1;
-		printf("!\n");
-		korzinka()->arg = *args;
-	}
-	if (del->prev != NULL) //последний нод
-	{
-		del->prev->on = 0;
 		del->prev->next = del->next;
-		del->prev->next->on = 1;
-		printf("-\n");
+		del->next->on = 1;
+	}
+	if (del->prev != NULL && del->next == NULL)
+	{
+		del->prev->next = NULL;
+		(*head)->on = 1;
 	}
 	free(del);
-	korzinka()->arg = *args;
+}
+
+void			ft_del(t_arg **args)
+{
+	int		i;
+	int		n;
+	t_arg 	*cur;
+
+	if (*args == NULL)
+		return ;
+	i = 1;
+	cur = *args;
+	n = where(args);
+	while ((cur != NULL) && (i < n))
+	{
+		i++;
+		cur = cur->next;
+	}
+	if (!cur)
+		return ;
+	deleteNode(args, cur);
 }

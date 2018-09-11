@@ -34,14 +34,17 @@ void			key_init()
 	while (1)
 	{
 		key = 0;
-		korzinka()->quant = quantity(korzinka()->arg);
 		read(0, &key, 8);
-		// printf("%ld\n", key);
+		korzinka()->i = row_init(korzinka()->arg);
+		korzinka()->quant = quantity(korzinka()->arg);
+		// printf("|%ld|\n", key);
 		if (key == 2117294875)
 			exit(0);
-		if (key == 127)
+		if (key == DELETE)
+		{
 			ft_del(&korzinka()->arg);
-		if (key == 32)
+		}
+		if (key == SELECT)
 			ft_select_item(&korzinka()->arg);
 		if (key == ESC)
 		{

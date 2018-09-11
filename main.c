@@ -114,7 +114,6 @@ int				main(int argc, char **argv)
 		{
 			signal_s();
 			args = argv_init(argv);
-			korzinka()->i = row_init(args);
 			korzinka()->arg = args;
 			if (terminal_define() == 0)
 				return (0);

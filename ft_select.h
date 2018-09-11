@@ -27,10 +27,12 @@
 # include	<sys/ioctl.h>
 # include	"libft/libft.h"
 # define 	ESC 27
+# define 	SELECT 32
 # define 	A 65
 # define 	B 66
 # define 	C 67
 # define 	D 68
+# define 	DELETE 127
 # define    UP 4283163
 # define    DOWN 4348699
 # define    RIGHT 4414235
@@ -67,6 +69,7 @@ int				st_int();
 
 void			settings_on(t_arg *tmp);
 void			settings_off(t_arg *tmp);
+int 			row_init(t_arg *args);
 
 int				find_act(t_arg *args, int col_q);
 int				get_col(struct winsize sz, int max_s);
