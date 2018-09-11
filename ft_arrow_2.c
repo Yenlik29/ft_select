@@ -41,10 +41,19 @@ void			enter(t_arg **args)
 		tmp = tmp->next;
 	}
 	reset_original();
-	print_beauty_start();
-	print_list(new);
-	ft_putstr("\033[5m");
-	ft_putstr("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-	ft_putstr(C_NONE);
+	if (new != NULL)
+	{
+		print_beauty_start();
+		print_list(new);
+		ft_putstr("\033[5m");
+		ft_putstr("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+		ft_putstr(C_NONE);
+	}
+	else
+	{
+		ft_putstr("\033[01;38;05;181m");
+		ft_putstr("You didn't choose anything, my friend:(\n");
+		ft_putstr(C_NONE);
+	}
 	exit(0);
 }

@@ -70,11 +70,9 @@ void			print_list(t_arg *lst)
 	tmp = lst;
 	while (tmp != NULL)
 	{
-		ft_putstr(tmp->name);
-		ft_putstr(" ");
+		ft_putendl(tmp->name);
 		tmp = tmp->next;
 	}
-	ft_putstr("\n");
 }
 
 int				get_col(struct winsize sz, int max_s)
