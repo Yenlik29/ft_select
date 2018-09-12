@@ -71,6 +71,7 @@ typedef struct 			s_link
 
 t_link			*korzinka(void);
 int				st_int();
+void			output(t_arg *tmp, t_arg *args);
 
 void			enter(t_arg **args);
 

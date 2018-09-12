@@ -12,13 +12,13 @@
 
 #include "ft_select.h"
 
-int 			row_init(t_arg *args)
+int				row_init(t_arg *args)
 {
 	struct winsize	sz;
-	int 			max_s;
-	int 			col_q;
+	int				max_s;
+	int				col_q;
 	int				row_q;
-	int 			q;
+	int				q;
 
 	ioctl(0, TIOCGWINSZ, &sz);
 	max_s = max_strlen(args);
@@ -28,11 +28,10 @@ int 			row_init(t_arg *args)
 	return (row_q);
 }
 
-int 			reset_original()
+int				reset_original(void)
 {
 	struct termios original;
 
-	
 	tcgetattr(0, &original);
 	original.c_lflag |= ICANON;
 	original.c_lflag |= ECHO;
@@ -40,7 +39,7 @@ int 			reset_original()
 	tcsetattr(0, TCSANOW, &original);
 	tputs(tgetstr("te", 0), 1, re_putchar);
 	tputs(tgetstr("ve", 0), 1, re_putchar);
-	if (tcsetattr(0, TCSANOW, &original)  != 0)
+	if (tcsetattr(0, TCSANOW, &original) != 0)
 	{
 		ft_error_tcsetattr();
 		return (0);
@@ -48,7 +47,7 @@ int 			reset_original()
 	return (1);
 }
 
-int 			terminal_define()
+int				terminal_define(void)
 {
 	struct termios	original;
 	struct termios	copy;
@@ -80,7 +79,7 @@ int				terminal_init(void)
 {
 	char	*termtype;
 	char	term_buf[2048];
-	int 	success;
+	int		success;
 
 	if (!(isatty(0)))
 	{
@@ -101,17 +100,13 @@ int				terminal_init(void)
 
 int				main(int argc, char **argv)
 {
-	t_arg *args;
-	int ret;
+	t_arg	*args;
+	int		ret;
 
 	args = NULL;
 	(argc < 2) ? ft_error_quantity() : NULL;
 	if (argc > 1)
 	{
-		ft_putstr(C_RED);
-		ft_putstr("Counting..wait, pls\n");
-		ft_putstr(C_NONE);
-		sleep (1);
 		if ((ret = terminal_init()) <= 0)
 			return (0);
 		else
