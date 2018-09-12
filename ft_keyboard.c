@@ -47,7 +47,6 @@ void			key_init()
 		{
 			reset_original();
 			signal(SIGTSTP, SIG_DFL);
-			printf("ESC\n");
 			exit(0);
 		}
 		if (key == UP)

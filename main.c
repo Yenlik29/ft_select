@@ -108,6 +108,10 @@ int				main(int argc, char **argv)
 	(argc < 2) ? ft_error_quantity() : NULL;
 	if (argc > 1)
 	{
+		ft_putstr(C_RED);
+		ft_putstr("Counting..wait, pls\n");
+		ft_putstr(C_NONE);
+		sleep (1);
 		if ((ret = terminal_init()) <= 0)
 			return (0);
 		else

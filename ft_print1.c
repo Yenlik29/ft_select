@@ -79,6 +79,22 @@ int				max_row(t_arg *lst)
 	return (row);
 }
 
+int				parse(mode_t st_mode)
+{
+	int valid;
+
+	valid = 0;
+	S_ISBLK(st_mode) ? valid = 1 : valid;
+	S_ISCHR(st_mode) ? valid = 1 : valid;
+	S_ISDIR(st_mode) ? valid = 1 : valid;
+	S_ISFIFO(st_mode) ? valid = 1 : valid;
+	S_ISREG(st_mode) ? valid = 1 : valid;
+	S_ISLNK(st_mode) ? valid = 1: valid;
+	S_ISSOCK(st_mode) ? valid = 1: valid;
+	(st_mode & S_IXUSR && !S_ISDIR(st_mode)) ? valid = 1 : valid;
+	return (valid);
+}
+
 int				find_act(t_arg *args, int col_q)
 {
 	int		row;
@@ -128,20 +144,21 @@ void			print_more(t_arg *args, int col_q, struct winsize sz)
 			while (col_q--)
 			{
 				settings_on(tmp);
-				ft_color(tmp->st_mode);
-				ft_putstr(tmp->name);
-				ft_putstr(C_NONE);
+				// if (parse(tmp->st_mode) == 1)
+					// ft_color(tmp->st_mode);
+				ft_putstr_fd(tmp->name, 1);
+				ft_putstr_fd(C_NONE, 1);
 				settings_off(tmp);
 				if (max_strlen(args) >= (int)ft_strlen(tmp->name))
 					dif = max_strlen(args) - (int)ft_strlen(tmp->name);
 				print_dif(dif);
-				ft_putstr(" ");
+				ft_putstr_fd(" ", 1);
 				tmp = tmp->next;
 			}
-			ft_putstr("\n");
+			ft_putstr_fd("\n", 1);
 		}
 	}
-	ft_putstr("...");
+	ft_putstr_fd("...", 1);
 	if ((i > nw.ws_row - 1) && (i <= korzinka()->i) && tmp)
 		print_display(tmp);
 }
@@ -150,7 +167,7 @@ void			print_dif(int dif)
 {
 	while (dif)
 	{
-		ft_putstr(" ");
+		ft_putstr_fd(" ", 1);
 		dif--;
 	}
 }
@@ -160,7 +177,7 @@ void			settings_on(t_arg *tmp)
 	if (tmp->click == 1)
 		tputs(tgetstr("mr", NULL), 1, re_putchar);
 	if (tmp->click == 0)
-		ft_putstr(C_NONE);
+		ft_putstr_fd(C_NONE, 1);
 	if (tmp->on == 1)
 		tputs(tgetstr("us", 0), 1, re_putchar);
 }
@@ -170,7 +187,7 @@ void			settings_off(t_arg *tmp)
 	if (tmp->on == 1)
 		tputs(tgetstr("me", 0), 1, re_putchar);
 	if (tmp->click == 1)
-		ft_putstr(C_NONE);
+		ft_putstr_fd(C_NONE, 1);
 }
 
 void			print_norm(t_arg *args, int col_q)
@@ -193,19 +210,20 @@ void			print_norm(t_arg *args, int col_q)
 			if (tmp)
 			{
 				settings_on(tmp);
-				ft_color(tmp->st_mode);
-				ft_putstr(tmp->name);
-				ft_putstr(C_NONE);
+				// if (parse(tmp->st_mode) == 1)
+					// ft_color(tmp->st_mode);
+				ft_putstr_fd(tmp->name, 1);
+				ft_putstr_fd(C_NONE, 1);
 				settings_off(tmp);
 				if (max_strlen(args) >= (int)ft_strlen(tmp->name))
 					dif = max_strlen(args) - (int)ft_strlen(tmp->name);
 				print_dif(dif);
 				tmp = tmp->next;
-				ft_putstr(" ");
+				ft_putstr_fd(" ", 1);
 			}
 		}
 		if (i != sz.ws_row)
-			ft_putstr("\n");
+			ft_putstr_fd("\n", 1);
 	}
 }
 

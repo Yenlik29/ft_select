@@ -48,6 +48,7 @@
 # define 	C_MAGENTA	"\033[35"
 # define 	C_PINK   "\e[38;5;175m"
 # define 	C_PURPLE "\033[01;38;05;55m"
+# define 	C_NZN "\e[38;5;82m"
 
 typedef struct 			s_arg
 {

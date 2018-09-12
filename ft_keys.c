@@ -76,6 +76,7 @@ void			deleteNode(t_arg **head, t_arg *del)
 		del->prev->next = NULL;
 		(*head)->on = 1;
 	}
+	free(del->name);
 	free(del);
 }
 
