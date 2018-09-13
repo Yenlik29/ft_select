@@ -32,9 +32,10 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
 	@gcc $(FLAGS) -o $(NAME) $(OBJ) -lft -L $(LIBFT_DIR) -ltermcap
+	@echo "\033[48;5;7m\033[31m\033[5mDone: ./ft_select is created."
 
 %.o: %.c ft_select.h
-	$(CC) -c $< -o $@ $(FLAGS) $(HEADER_FLAGS)
+	@$(CC) -c $< -o $@ $(FLAGS) $(HEADER_FLAGS)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)

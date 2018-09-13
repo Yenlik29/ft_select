@@ -71,77 +71,76 @@ typedef struct			s_link
 	t_arg	*arg;
 }						t_link;
 
-t_link					*korzinka(void);
-int						st_int();
-void					output(t_arg *tmp, t_arg *args);
-
-void					enter(t_arg **args);
-t_arg					*d1(t_arg *tmp, t_arg **args, int i);
-t_arg					*d2(t_arg *tmp, t_arg **args, int i);
-t_arg					*go_next(t_arg *tmp);
-void					tmp_on(t_arg *tmp, t_arg **args);
-t_arg					*f_i(t_arg *tmp, int *i);
-t_arg					*if_1(t_arg *tmp, t_arg **args, int i);
-t_arg					*f_else(t_arg *tmp, t_arg **args);
-
-void					settings_on(t_arg *tmp);
-void					settings_off(t_arg *tmp);
+int						terminal_init(void);
+int						terminal_define(void);
+int						reset_original(void);
 int						row_init(t_arg *args);
-int						quantity(t_arg *args);
-void					ft_color(mode_t st_mode);
+
+void					signal_s(void);
+void					sighandler(int signum);
 
 int						find_act(t_arg *args, int col_q);
-int						get_col(struct winsize sz, int max_s);
-int						get_row(int col_q, int q);
-void					print_display(t_arg *args);
-
-int						struct_col(t_arg *args);
-t_arg					*ft_create_arg(char *name);
-t_arg					*ft_add_arg(t_arg *lst, char *name);
-void					print_list(t_arg *lst);
-t_arg					*argv_init(char **argv);
-
-int						column(t_arg *tmp);
+int						max_row(t_arg *lst);
 int						find_row(t_arg *args, int j);
+int						column(t_arg *tmp);
+void					output(t_arg *tmp, t_arg *args);
+
+void					print_norm(t_arg *args, int col_q);
+void					settings_off(t_arg *tmp);
+void					settings_on(t_arg *tmp);
 void					print_dif(int dif);
 void					print_more(t_arg *args, int col_q, struct winsize sz);
-void					print_norm(t_arg *args, int col_q);
 
-void					print_argv(char **argv);
-int						ft_count(char **argv);
-void					key_init(void);
+t_arg					*argv_init(char **argv);
+t_arg					*ft_add_arg(t_arg *lst, char *name);
+t_arg					*ft_create_arg(char *name);
+int						get_row(int col_q, int q);
+int						struct_col(t_arg *args);
 
-void					work(t_arg *tmp, t_arg **args, int n);
-int						find(t_arg *lst, int col_q, int i);
-int						reset_original();
-int						terminal_define();
-int						terminal_init(void);
+t_link					*korzinka(void);
 
-void					ft_up(t_arg **args);
-void					ft_right(t_arg **args);
-void					ft_down(t_arg **args);
-void					ft_left(t_arg **args);
 void					ft_del(t_arg **args);
-t_arg					*make_cycle(t_arg *lst, int i);
-void					ft_select_item(t_arg **args);
+void					delete_node(t_arg **head, t_arg *del);
+int						where(t_arg **args);
 
-int						max_strlen(t_arg *args);
-int						count_r_c(int wml, int space);
-int						max_l(char	**argv);
-int						len(char **argv);
-int						re_putchar(int ch);
+void					print_display(t_arg *args);
+int						get_col(struct winsize sz, int max_s);
+void					print_list(t_arg *lst);
+void					key_init(void);
+int						quantity(t_arg *args);
 
-void					sighandler(int signum);
-void					signal_s(void);
+void					ft_error_tcsetattr(void);
+void					ft_error_isatty(void);
+void					ft_error_display_size(void);
 
-void					ft_error_tcgetattr(void);
 void					ft_error_quantity(void);
 void					ft_error_noterm(void);
 void					ft_error_term_access(void);
 void					ft_error_termdef(char *termtype);
+void					ft_error_tcgetattr(void);
 
-void					ft_error_display_size(void);
-void					ft_error_tcsetattr(void);
-void					ft_error_isatty(void);
+t_arg					*f_else(t_arg *tmp, t_arg **args);
+t_arg					*if_1(t_arg *tmp, t_arg **args, int i);
+t_arg					*f_i(t_arg *tmp, int *i);
+void					tmp_on(t_arg *tmp, t_arg **args);
+t_arg					*go_next(t_arg *tmp);
+
+void					enter(t_arg **args);
+int						find(t_arg *lst, int col_q, int i);
+void					work(t_arg *tmp, t_arg **args, int n);
+t_arg					*d2(t_arg *tmp, t_arg **args, int i);
+t_arg					*d1(t_arg *tmp, t_arg **args, int i);
+
+void					ft_right(t_arg **args);
+void					ft_down(t_arg **args);
+void					ft_left(t_arg **args);
+void					ft_up(t_arg **args);
+void					ft_select_item(t_arg **args);
+
+int						re_putchar(int ch);
+int						len(char **argv);
+int						max_l(char **argv);
+int						count_r_c(int wml, int space);
+int						max_strlen(t_arg *args);
 
 #endif
