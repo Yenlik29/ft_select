@@ -14,8 +14,8 @@
 
 int				struct_col(t_arg *args)
 {
-	int i;
-	t_arg *s;
+	int		i;
+	t_arg	*s;
 
 	i = 0;
 	s = args;
@@ -27,7 +27,7 @@ int				struct_col(t_arg *args)
 	return (i);
 }
 
-int 			get_row(int col_q, int q)
+int				get_row(int col_q, int q)
 {
 	int row_q;
 
@@ -41,7 +41,7 @@ int 			get_row(int col_q, int q)
 
 t_arg			*ft_create_arg(char *name)
 {
-	t_arg 			*new;
+	t_arg			*new;
 	struct stat		buf;
 	char			path[1024];
 
@@ -59,8 +59,8 @@ t_arg			*ft_create_arg(char *name)
 
 t_arg			*ft_add_arg(t_arg *lst, char *name)
 {
-	t_arg 			*temp;
-	t_arg 			*new_node;
+	t_arg			*temp;
+	t_arg			*new_node;
 	struct stat		buf;
 	char			path[1024];
 
@@ -96,7 +96,7 @@ t_arg			*argv_init(char **argv)
 	{
 		if (new == NULL)
 			new = ft_create_arg(argv[i]);
-		else	
+		else
 			new = ft_add_arg(new, argv[i]);
 		i++;
 	}

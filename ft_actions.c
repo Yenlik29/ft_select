@@ -28,15 +28,15 @@ int				max_strlen(t_arg *args)
 	return (max);
 }
 
-int				count_r_c(int WML, int CP)
+int				count_r_c(int wml, int space)
 {
-	int N;
+	int n;
 
-	N = WML + (CP * 4);
-	return (N);
+	n = wml + (space * 4);
+	return (n);
 }
 
-int				max_l(char	**argv)
+int				max_l(char **argv)
 {
 	int i;
 	int count;

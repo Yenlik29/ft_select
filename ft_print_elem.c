@@ -43,24 +43,22 @@ int				find_row(t_arg *args, int j)
 {
 	int		col;
 	int		count;
-	int		col_q;
 	int		row;
 	t_arg	*tmp;
 
 	row = 1;
 	count = 0;
 	tmp = args;
-	col_q = column(tmp);
 	while (tmp)
 	{
 		while (count++ != j)
 		{
 			col = 1;
-			while (col <= col_q)
+			while (col <= column(tmp))
 			{
 				if (tmp->on == 1)
 					return (row);
-				if (col == col_q)
+				if (col == column(tmp))
 					row++;
 				col++;
 				tmp = tmp->next;

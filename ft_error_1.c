@@ -24,17 +24,17 @@ void			ft_error_termdef(char *termtype)
 	ft_putstr_fd("is not defined.\n", 2);
 }
 
-void			ft_error_term_access()
+void			ft_error_term_access(void)
 {
 	ft_putstr_fd("Could not access the termcap database.\n", 2);
 }
 
-void			ft_error_noterm()
+void			ft_error_noterm(void)
 {
 	ft_putstr_fd("Specify a terminal type with `setenv TERM <yourtype>`.\n", 2);
 }
 
-void			ft_error_quantity()
+void			ft_error_quantity(void)
 {
 	ft_putstr_fd("ft_select: wrong argument quantity.\n", 2);
 }

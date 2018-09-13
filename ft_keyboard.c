@@ -12,10 +12,10 @@
 
 #include "ft_select.h"
 
-int 			quantity(t_arg *args)
+int				quantity(t_arg *args)
 {
-	int 	i;
-	t_arg 	*tmp;
+	int		i;
+	t_arg	*tmp;
 
 	i = 0;
 	tmp = args;
@@ -27,7 +27,7 @@ int 			quantity(t_arg *args)
 	return (i);
 }
 
-void			key_init()
+void			key_init(void)
 {
 	long key;
 
@@ -37,28 +37,20 @@ void			key_init()
 		read(0, &key, 8);
 		korzinka()->i = row_init(korzinka()->arg);
 		korzinka()->quant = quantity(korzinka()->arg);
-		if (key == 10)
-			enter(&korzinka()->arg);
-		if (key == DELETE || key == BACK)
-			ft_del(&korzinka()->arg);
-		if (key == SELECT)
-			ft_select_item(&korzinka()->arg);
+		(key == 10) ? enter(&korzinka()->arg) : NULL;
+		(key == DELETE || key == BACK) ? ft_del(&korzinka()->arg) : NULL;
+		(key == SELECT) ? ft_select_item(&korzinka()->arg) : NULL;
 		if (key == ESC)
 		{
 			reset_original();
 			signal(SIGTSTP, SIG_DFL);
 			exit(0);
 		}
-		if (key == UP)
-			ft_up(&korzinka()->arg);
-		if (key == DOWN)
-			ft_down(&korzinka()->arg);
-		if (key == RIGHT)
-			ft_right(&korzinka()->arg);
-		if (key == LEFT)
-			ft_left(&korzinka()->arg);
-		if (korzinka()->arg)
-			print_display(korzinka()->arg);
+		(key == UP) ? ft_up(&korzinka()->arg) : NULL;
+		(key == DOWN) ? ft_down(&korzinka()->arg) : NULL;
+		(key == RIGHT) ? ft_right(&korzinka()->arg) : NULL;
+		(key == LEFT) ? ft_left(&korzinka()->arg) : NULL;
+		print_display(korzinka()->arg);
 	}
 }
 
@@ -85,10 +77,10 @@ int				get_col(struct winsize sz, int max_s)
 void			print_display(t_arg *args)
 {
 	struct winsize	sz;
-	int 			max_s;
-	int 			col_q;
+	int				max_s;
+	int				col_q;
 	int				row_q;
-	int 			q;
+	int				q;
 
 	ioctl(0, TIOCGWINSZ, &sz);
 	tputs(tgetstr("cl", NULL), 1, re_putchar);

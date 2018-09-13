@@ -35,7 +35,7 @@ void			sighandler(int signum)
 		signal(signum, SIG_IGN);
 }
 
-void			signal_s()
+void			signal_s(void)
 {
 	signal(SIGINT, sighandler);
 	signal(SIGQUIT, sighandler);

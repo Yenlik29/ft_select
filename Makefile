@@ -6,7 +6,7 @@
 #    By: ybokina <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/23 12:12:47 by ybokina           #+#    #+#              #
-#    Updated: 2018/09/12 22:18:16 by ybokina          ###   ########.fr        #
+#    Updated: 2018/09/13 14:30:23 by ybokina          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@ NAME := ft_select
 
 FLAGS := -Wall -Wextra -Werror
 
-SOURCES := main.c ft_error_1.c ft_error_2.c ft_actions.c ft_signal.c ft_keyboard.c ft_nodes.c ft_print.c ft_arrow_1.c ft_keys.c ft_korz.c ft_arrow_2.c ft_print_elem.c
+SOURCES := main.c ft_error_1.c ft_error_2.c ft_actions.c ft_signal.c ft_keyboard.c ft_nodes.c ft_print.c ft_arrow_1.c ft_keys.c ft_korz.c ft_arrow_2.c ft_print_elem.c ft_arrow_3.c
 
 OBJ := $(SOURCES:.c=.o)
 

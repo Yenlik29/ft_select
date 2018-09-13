@@ -12,36 +12,10 @@
 
 #include "ft_select.h"
 
-t_arg			*make_cycle(t_arg *lst, int i)
-{
-	int l;
-	t_arg *head;
-	t_arg *tmp;
-
-	l = 0;
-	head = lst;
-	tmp = lst;
-	while (tmp)
-	{
-		if (l < i)
-		{
-			l++;
-			tmp = tmp->next;
-		}
-		if (l == i)
-		{
-			printf("*\n");
-			tmp->next = head;
-			head->prev = tmp;
-		}
-	}
-	return (lst);
-}
-
 int				where(t_arg **args)
 {
 	int		i;
-	t_arg 	*tmp;
+	t_arg	*tmp;
 
 	i = 1;
 	tmp = *args;
@@ -55,7 +29,7 @@ int				where(t_arg **args)
 	return (i);
 }
 
-void			deleteNode(t_arg **head, t_arg *del)
+void			delete_node(t_arg **head, t_arg *del)
 {
 	if (*head == NULL || del == NULL)
 		return ;
@@ -84,7 +58,7 @@ void			ft_del(t_arg **args)
 {
 	int		i;
 	int		n;
-	t_arg 	*cur;
+	t_arg	*cur;
 
 	if (*args == NULL)
 		return ;
@@ -103,5 +77,5 @@ void			ft_del(t_arg **args)
 	}
 	if (!cur)
 		return ;
-	deleteNode(args, cur);
+	delete_node(args, cur);
 }

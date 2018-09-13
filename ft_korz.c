@@ -12,7 +12,7 @@
 
 #include "ft_select.h"
 
-t_link 			*korzinka(void)
+t_link			*korzinka(void)
 {
 	static t_link tmp;
 
