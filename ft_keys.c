@@ -12,6 +12,15 @@
 
 #include "ft_select.h"
 
+int				w_col(t_arg *args, int col_q)
+{
+	t_arg	*tmp;
+
+	tmp = args;
+	find_act(korzinka()->arg, col_q);
+	return (korzinka()->j);
+}
+
 int				where(t_arg **args)
 {
 	int		i;

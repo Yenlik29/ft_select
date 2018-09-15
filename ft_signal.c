@@ -28,19 +28,29 @@ void			sighandler(int signum)
 		signal_s();
 	}
 	else if (signum == 28)
-	{
 		print_display(korzinka()->arg);
-	}
 	else
-		signal(signum, SIG_IGN);
+	{
+		reset_original();
+		exit(0);
+	}
 }
 
 void			signal_s(void)
 {
 	signal(SIGINT, sighandler);
-	signal(SIGQUIT, sighandler);
 	signal(SIGABRT, sighandler);
 	signal(SIGTSTP, sighandler);
 	signal(SIGWINCH, sighandler);
 	signal(SIGCONT, sighandler);
+	signal(SIGTERM, sighandler);
+	signal(SIGKILL, sighandler);
+	signal(SIGSTOP, sighandler);
+	signal(SIGQUIT, sighandler);
+	signal(SIGHUP, sighandler);
+	signal(SIGSEGV, sighandler);
+	signal(SIGFPE, sighandler);
+	signal(SIGALRM, sighandler);
+	signal(SIGUSR1, sighandler);
+	signal(SIGUSR2, sighandler);
 }

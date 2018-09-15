@@ -107,7 +107,10 @@ int				find_act(t_arg *args, int col_q)
 		while (col <= col_q)
 		{
 			if (tmp->on == 1)
+			{
 				j = row;
+				korzinka()->j = j;
+			}
 			if (col == col_q)
 				row++;
 			col++;
@@ -115,7 +118,7 @@ int				find_act(t_arg *args, int col_q)
 		tmp = tmp->next;
 	}
 	if (j % col_q != 0)
-		row = (j / col_q) + 1;
+		row = ((j / col_q) + 1);
 	else
 		row = j / col_q;
 	return (row);

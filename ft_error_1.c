@@ -37,4 +37,5 @@ void			ft_error_noterm(void)
 void			ft_error_quantity(void)
 {
 	ft_putstr_fd("ft_select: wrong argument quantity.\n", 2);
+	exit(EXIT_FAILURE);
 }

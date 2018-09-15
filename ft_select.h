@@ -50,7 +50,7 @@
 # define C_PURPLE		"\033[01;38;05;55m"
 # define C_NZN			"\e[38;5;82m"
 # define K_MINUS		(korzinka()->i - 1)
-# define COL			get_col(sz, max_strlen(*args))
+// # define COL			get_col(sz, max_strlen(*args))
 
 typedef struct			s_arg
 {
@@ -66,8 +66,13 @@ typedef struct			s_arg
 typedef struct			s_link
 {
 	int		i;
+	int 	j;
 	int		quant;
+	int		last;
+	int		col;
+	int		max_s;
 	char	**av;
+	int 	flag;
 	t_arg	*arg;
 }						t_link;
 
@@ -75,6 +80,7 @@ int						terminal_init(void);
 int						terminal_define(void);
 int						reset_original(void);
 int						row_init(t_arg *args);
+int						w_col(t_arg *args, int col_q);
 
 void					signal_s(void);
 void					sighandler(int signum);

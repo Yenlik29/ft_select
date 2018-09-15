@@ -22,6 +22,10 @@ void			print_more(t_arg *args, int col_q, struct winsize sz)
 	c = col_q;
 	tmp = args;
 	i = find_act(tmp, col_q);
+	korzinka()->max_s = max_strlen(tmp);
+	korzinka()->last = korzinka()->max_s;
+	korzinka()->col = col_q;
+	korzinka()->flag = 1;
 	ioctl(0, TIOCGWINSZ, &nw);
 	while (tmp && --sz.ws_row)
 	{
@@ -78,6 +82,13 @@ void			print_norm(t_arg *args, int col_q)
 	i = 0;
 	col = col_q;
 	tmp = args;
+	if (find_act(tmp, col) == 1)
+		korzinka()->max_s = korzinka()->last;
+	else
+		korzinka()->max_s = max_strlen(tmp);
+	korzinka()->last = korzinka()->max_s;
+	korzinka()->col = col_q;
+	korzinka()->flag = 0;
 	ioctl(0, TIOCGWINSZ, &sz);
 	while (tmp && i++ <= sz.ws_row)
 	{

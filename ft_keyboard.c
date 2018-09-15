@@ -77,22 +77,23 @@ int				get_col(struct winsize sz, int max_s)
 void			print_display(t_arg *args)
 {
 	struct winsize	sz;
-	int				max_s;
 	int				col_q;
 	int				row_q;
 	int				q;
+	t_arg			*tmp;
 
+	tmp = args;
 	ioctl(0, TIOCGWINSZ, &sz);
 	tputs(tgetstr("cl", NULL), 1, re_putchar);
-	max_s = max_strlen(args);
-	if (((max_s + 2) > (sz.ws_col - 4)) || (sz.ws_row < 1))
+	korzinka()->max_s = max_strlen(tmp);
+	if (((korzinka()->max_s + 2) > (sz.ws_col - 4)) || (sz.ws_row < 1))
 	{
 		tputs(tgetstr("cl", NULL), 1, re_putchar);
 		ft_error_display_size();
 		return ;
 	}
 	q = struct_col(args);
-	col_q = get_col(sz, max_s);
+	col_q = get_col(sz, korzinka()->max_s);
 	row_q = get_row(col_q, q);
 	if (row_q > sz.ws_row)
 		print_more(args, col_q, sz);

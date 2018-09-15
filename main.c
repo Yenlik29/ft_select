@@ -35,15 +35,16 @@ int				reset_original(void)
 	tcgetattr(0, &original);
 	original.c_lflag |= ICANON;
 	original.c_lflag |= ECHO;
+	original.c_cc[VTIME] = 0;
 	original.c_cc[VMIN] = 1;
 	tcsetattr(0, TCSANOW, &original);
-	tputs(tgetstr("te", 0), 1, re_putchar);
-	tputs(tgetstr("ve", 0), 1, re_putchar);
 	if (tcsetattr(0, TCSANOW, &original) != 0)
 	{
 		ft_error_tcsetattr();
 		return (0);
 	}
+	tputs(tgetstr("ve", NULL), 1, re_putchar);
+	tputs(tgetstr("te", NULL), 1, re_putchar);
 	return (1);
 }
 
@@ -105,23 +106,20 @@ int				main(int argc, char **argv)
 
 	args = NULL;
 	(argc < 2) ? ft_error_quantity() : NULL;
-	if (argc > 1)
+	if ((ret = terminal_init()) <= 0)
+		return (0);
+	else
 	{
-		if ((ret = terminal_init()) <= 0)
+		signal_s();
+		args = argv_init(argv);
+		korzinka()->arg = args;
+		if (terminal_define() == 0)
 			return (0);
 		else
 		{
-			signal_s();
-			args = argv_init(argv);
-			korzinka()->arg = args;
-			if (terminal_define() == 0)
-				return (0);
-			else
-			{
-				print_display(args);
-				key_init();
-				reset_original();
-			}
+			print_display(args);
+			key_init();
+			reset_original();
 		}
 	}
 	return (0);

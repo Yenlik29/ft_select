@@ -42,19 +42,31 @@ t_arg			*if_1(t_arg *tmp, t_arg **args, int i)
 	int				count;
 	t_arg			*lst;
 	struct winsize	sz;
+	int				col_q;
+	int 			j;
 
 	count = 0;
 	lst = *args;
 	tmp->on = 0;
 	ioctl(0, TIOCGWINSZ, &sz);
-	if (K_MINUS * COL + i > korzinka()->quant)
+	col_q = get_col(sz, korzinka()->max_s);
+	if ((K_MINUS * col_q) + i > korzinka()->quant)
 		tmp = go_next(tmp);
 	else
 	{
-		while (count != (K_MINUS * COL))
+		if (korzinka()->flag == 1)
 		{
-			tmp = tmp->next;
-			count++;
+			while (tmp->next)
+				tmp = tmp->next;
+		}
+		else
+		{
+			ft_putnbr(korzinka()->i);
+			// j = korzinka()->quant - ((get_row(col_q, korzinka()->quant) - 1) * col_q);
+			// ft_putnbr(korzinka()->quant - ((get_row(col_q, korzinka()->quant) - 1) * col_q));
+			// while (j-- && lst)
+			j = 0;
+			exit(0);
 		}
 	}
 	tmp_on(tmp, args);
@@ -65,12 +77,26 @@ t_arg			*f_else(t_arg *tmp, t_arg **args)
 {
 	int				count;
 	struct winsize	sz;
+	int				col_q;
+	int				q;
+	int 			col;
 
 	count = 0;
 	tmp->on = 0;
 	ioctl(0, TIOCGWINSZ, &sz);
-	while (count++ != COL)
-		tmp = tmp->prev;
+	q = struct_col(tmp);
+	col_q = get_col(sz, korzinka()->max_s);
+	if (col_q != korzinka()->col)
+	{
+		col = w_col(tmp, korzinka()->col);
+		while (col--)
+			tmp = tmp->prev;
+	}
+	else
+	{
+		while (count++ != col_q)
+			tmp = tmp->prev;
+	}
 	tmp_on(tmp, args);
 	return (tmp);
 }
