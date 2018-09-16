@@ -61,7 +61,8 @@ void			print_list(t_arg *lst)
 	tmp = lst;
 	while (tmp != NULL)
 	{
-		ft_putendl(tmp->name);
+		ft_putstr(tmp->name);
+		ft_putstr(" ");
 		tmp = tmp->next;
 	}
 }

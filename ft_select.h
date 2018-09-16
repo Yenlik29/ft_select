@@ -50,7 +50,8 @@
 # define C_PURPLE		"\033[01;38;05;55m"
 # define C_NZN			"\e[38;5;82m"
 # define K_MINUS		(korzinka()->i - 1)
-// # define COL			get_col(sz, max_strlen(*args))
+# define SM				(i > nw.ws_row - 1)
+# define MAX			(find_act(tmp, col) == 1)
 
 typedef struct			s_arg
 {
@@ -66,14 +67,14 @@ typedef struct			s_arg
 typedef struct			s_link
 {
 	int		i;
-	int 	j;
+	int		j;
 	int		quant;
 	int		last;
 	int		col;
 	int		max_s;
-	int 	change;
+	int		change;
 	char	**av;
-	int 	flag;
+	int		flag;
 	t_arg	*arg;
 }						t_link;
 
@@ -149,5 +150,8 @@ int						len(char **argv);
 int						max_l(char **argv);
 int						count_r_c(int wml, int space);
 int						max_strlen(t_arg *args);
+
+t_arg					*d2_1(int col_q, t_arg *tmp);
+t_arg					*d1_1(int col_q, t_arg *tmp, t_arg *lst, int col);
 
 #endif

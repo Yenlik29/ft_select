@@ -42,7 +42,7 @@ t_arg			*if_1(t_arg *tmp, t_arg **args, int i)
 	t_arg			*lst;
 	struct winsize	sz;
 	int				col_q;
-	int 			j;
+	int				j;
 
 	j = 0;
 	lst = *args;
@@ -69,7 +69,7 @@ t_arg			*f_else(t_arg *tmp, t_arg **args)
 	struct winsize	sz;
 	int				col_q;
 	int				q;
-	int 			col;
+	int				col;
 
 	count = 0;
 	tmp->on = 0;

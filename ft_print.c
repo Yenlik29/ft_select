@@ -29,20 +29,16 @@ void			print_more(t_arg *args, int col_q, struct winsize sz)
 	ioctl(0, TIOCGWINSZ, &nw);
 	while (tmp && --sz.ws_row)
 	{
-		if (tmp)
+		col_q = c;
+		while (col_q-- && tmp)
 		{
-			col_q = c;
-			while (col_q--)
-			{
-				output(tmp, args);
-				tmp = tmp->next;
-			}
-			ft_putstr_fd("\n", 2);
+			output(tmp, args);
+			tmp = tmp->next;
 		}
+		ft_putstr_fd("\n", 2);
 	}
 	ft_putstr_fd("...", 2);
-	if ((i > nw.ws_row - 1) && (i <= korzinka()->i) && tmp)
-		print_display(tmp);
+	(SM && (i <= korzinka()->i) && tmp) ? print_display(tmp) : NULL;
 }
 
 void			print_dif(int dif)
@@ -82,10 +78,7 @@ void			print_norm(t_arg *args, int col_q)
 	i = 0;
 	col = col_q;
 	tmp = args;
-	if (find_act(tmp, col) == 1)
-		korzinka()->max_s = korzinka()->last;
-	else
-		korzinka()->max_s = max_strlen(tmp);
+	korzinka()->max_s = MAX ? korzinka()->last : max_strlen(tmp);
 	korzinka()->last = korzinka()->max_s;
 	korzinka()->col = col_q;
 	korzinka()->flag = 0;
@@ -93,15 +86,11 @@ void			print_norm(t_arg *args, int col_q)
 	while (tmp && i++ <= sz.ws_row)
 	{
 		col_q = col;
-		while (col_q--)
+		while (col_q-- && tmp)
 		{
-			if (tmp)
-			{
-				output(tmp, args);
-				tmp = tmp->next;
-			}
+			output(tmp, args);
+			tmp = tmp->next;
 		}
-		if (i != sz.ws_row)
-			ft_putstr_fd("\n", 2);
+		(i != sz.ws_row) ? ft_putstr_fd("\n", 2) : NULL;
 	}
 }

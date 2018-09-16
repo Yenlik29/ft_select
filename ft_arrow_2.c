@@ -25,16 +25,7 @@ t_arg			*d1(t_arg *tmp, t_arg **args, int i)
 	col = find(lst, col_q, i);
 	tmp->on = 0;
 	if ((i + col_q) > korzinka()->quant)
-	{
-		if (col_q == korzinka()->col)
-		{
-			while (col-- && lst)
-				lst = lst->next;
-			tmp = lst;
-		}
-		else
-			tmp = lst;
-	}
+		tmp = d1_1(col_q, tmp, lst, col);
 	else
 	{
 		while (i-- != 1)
@@ -62,22 +53,9 @@ t_arg			*d2(t_arg *tmp, t_arg **args, int i)
 			tmp = tmp->prev;
 	}
 	else if ((i + korzinka()->col) > korzinka()->quant)
-	{
 		tmp = go_next(tmp);
-	}
 	else
-	{
-		if (col_q != korzinka()->col)
-		{
-			while (korzinka()->col--)
-				tmp = tmp->next;
-		}
-		else
-		{
-			while (count++ != col_q)
-				tmp = tmp->next;	
-		}
-	}
+		tmp = d2_1(col_q, tmp);
 	tmp_on(tmp, args);
 	return (tmp);
 }
