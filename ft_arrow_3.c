@@ -39,36 +39,27 @@ t_arg			*f_i(t_arg *tmp, int *i)
 
 t_arg			*if_1(t_arg *tmp, t_arg **args, int i)
 {
-	int				count;
 	t_arg			*lst;
 	struct winsize	sz;
 	int				col_q;
 	int 			j;
 
-	count = 0;
+	j = 0;
 	lst = *args;
 	tmp->on = 0;
 	ioctl(0, TIOCGWINSZ, &sz);
 	col_q = get_col(sz, korzinka()->max_s);
-	if ((K_MINUS * col_q) + i > korzinka()->quant)
-		tmp = go_next(tmp);
-	else
+	// 	//во-первых, это только для первой строки и при измении колонки + сохраняет позицию
+	if (((korzinka()->i - 1) * korzinka()->col) + i <= korzinka()->quant)
 	{
-		if (korzinka()->flag == 1)
-		{
-			while (tmp->next)
-				tmp = tmp->next;
-		}
-		else
-		{
-			ft_putnbr(korzinka()->i);
-			// j = korzinka()->quant - ((get_row(col_q, korzinka()->quant) - 1) * col_q);
-			// ft_putnbr(korzinka()->quant - ((get_row(col_q, korzinka()->quant) - 1) * col_q));
-			// while (j-- && lst)
-			j = 0;
-			exit(0);
-		}
+		j = ((korzinka()->i - 1) * korzinka()->col);
+		while (j--)
+			tmp = tmp->next;
+		if (korzinka()->col != column(tmp))
+			tmp = go_next(tmp);
 	}
+	else
+		tmp = go_next(tmp);
 	tmp_on(tmp, args);
 	return (tmp);
 }

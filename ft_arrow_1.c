@@ -108,6 +108,7 @@ void			ft_down(t_arg **args)
 	{
 		if (find_row(lst, i) == korzinka()->i)
 		{
+			// ft_putstr();
 			tmp = d1(tmp, args, i);
 			return ;
 		}

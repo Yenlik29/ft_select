@@ -113,6 +113,7 @@ int				main(int argc, char **argv)
 		signal_s();
 		args = argv_init(argv);
 		korzinka()->arg = args;
+		korzinka()->change = 0;
 		if (terminal_define() == 0)
 			return (0);
 		else

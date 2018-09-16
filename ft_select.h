@@ -71,6 +71,7 @@ typedef struct			s_link
 	int		last;
 	int		col;
 	int		max_s;
+	int 	change;
 	char	**av;
 	int 	flag;
 	t_arg	*arg;
