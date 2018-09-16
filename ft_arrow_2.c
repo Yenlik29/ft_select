@@ -37,8 +37,6 @@ t_arg			*d1(t_arg *tmp, t_arg **args, int i)
 	}
 	else
 	{
-		ft_putstr("**");
-		exit(0);
 		while (i-- != 1)
 			tmp = tmp->prev;
 		while (i++ != col)
@@ -51,7 +49,6 @@ t_arg			*d1(t_arg *tmp, t_arg **args, int i)
 t_arg			*d2(t_arg *tmp, t_arg **args, int i)
 {
 	struct winsize	sz;
-	// t_arg 			*lst;
 	int				count;
 	int				col_q;
 
@@ -72,15 +69,11 @@ t_arg			*d2(t_arg *tmp, t_arg **args, int i)
 	{
 		if (col_q != korzinka()->col)
 		{
-			ft_putstr("!!");
-			exit(0);
 			while (korzinka()->col--)
 				tmp = tmp->next;
 		}
 		else
 		{
-			// ft_putstr("!");
-			// exit(0);
 			while (count++ != col_q)
 				tmp = tmp->next;	
 		}

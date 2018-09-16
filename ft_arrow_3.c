@@ -49,7 +49,6 @@ t_arg			*if_1(t_arg *tmp, t_arg **args, int i)
 	tmp->on = 0;
 	ioctl(0, TIOCGWINSZ, &sz);
 	col_q = get_col(sz, korzinka()->max_s);
-	// 	//во-первых, это только для первой строки и при измении колонки + сохраняет позицию
 	if (((korzinka()->i - 1) * korzinka()->col) + i <= korzinka()->quant)
 	{
 		j = ((korzinka()->i - 1) * korzinka()->col);
