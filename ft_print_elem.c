@@ -54,11 +54,11 @@ int				find_row(t_arg *args, int j)
 		while (count++ != j)
 		{
 			col = 1;
-			while (col <= column(tmp))
+			while (col <= korzinka()->col)
 			{
 				if (tmp->on == 1)
 					return (row);
-				if (col == column(tmp))
+				if (col == korzinka()->col)
 					row++;
 				col++;
 				tmp = tmp->next;
